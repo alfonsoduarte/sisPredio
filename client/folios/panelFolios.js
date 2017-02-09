@@ -145,6 +145,12 @@ function panelFoliosCtrl($scope, $meteor, $reactive,  $state, $stateParams, toas
 			Folios.update({_id:id}, {$set : {folioEstatus : folio.folioEstatus}});
 	};
 
+	this.AsignaAnalistaFolio = function(id)
+	{
+			var folio = Folios.findOne({_id:id});
+			folio.verificacionEstatus = "8";			//Folio Asignado al Analista
+			Folios.update({_id:id}, {$set : {verificacionEstatus : folio.verificacionEstatus}});
+	};
 	
 	this.getAnalista = function(usuario_id)
 	{		

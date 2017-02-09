@@ -15,13 +15,13 @@ Meteor.methods({
 	  }
 	},
 	updateUsuario: function (usuario, rol) {		
-	  var user = Meteor.users.findOne({"_id" : usuario._id});
+	  var user = Meteor.users.findOne({"username" : usuario.username});
 	  Meteor.users.update({_id: user._id}, {$set:{
 			username: usuario.username,
-			password: usuario.password,
 			roles: [rol],
 			profile: usuario.profile
 		}});
-		Accounts.setPassword(usuario._id, usuario.password, {logout: false});
+		
+		Accounts.setPassword(user._id, usuario.password, {logout: false});
 	}
 });

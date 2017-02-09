@@ -26,15 +26,23 @@
 			    <td>{{folio.prioridad}}</td>
 			    <td>{{pf.getAnalista(folio.analista_id)}}</td>
 			    <td>
-				    <div class="text-center" ng-if = "folio.verificacionEstatus == '7'">
+				    <div class="text-center">
 					    <div class="btn-group">
 							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="caret"></span>
 							    <span class="sr-only">Toggle Dropdown</span>
 							  </button>
 							  <ul class="dropdown-menu text-left">
-							  	<li><a href="#" ng-click="pf.finalizarFolio(folio._id)">
+							  	<li ng-if = "folio.verificacionEstatus == '7'"><a href="#" ng-click="pf.finalizarFolio(folio._id)">
 							    				<i class="fa fa-check"></i> Finalizar
+							    		</a>
+							    </li>
+							    <li><a href="#" ng-click="pf.duplicadoFolio(folio._id)">
+							    				<i class="fa fa-files-o"></i> Duplicado
+							    		</a>
+							    </li>
+							    <li><a href="#" ng-click="pf.AsignaAnalistaFolio(folio._id)">
+							    				<i class="fa fa-hand-o-up"></i> Trabajar Analista
 							    		</a>
 							    </li>
 							  </ul>

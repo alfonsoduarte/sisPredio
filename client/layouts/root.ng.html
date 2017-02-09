@@ -1,6 +1,6 @@
 <header id="header">
 	<div id="logo-group">
-		<span id="logo" style="margin-top: 0px !important;"> <img ng-if="ro.seccion.logo != undefined" ng-src="{{ro.seccion.logo}}" style="width: 110px;" alt="Escuelas"> </span>
+		<span id="logo" style="margin-top: 0px !important;"> <img ng-if="ro.seccion.logo != undefined" ng-src="{{ro.seccion.logo}}" style="width: 110px;" alt="Verificaciones"> </span>
 		<span ng-if="ro.usuarioActual.roles[0] == 'director'" id="activity" class="activity-dropdown" ng-click="ro.muestraAvisos()"> <i class="fa fa-user"></i> <b class="badge  bounceIn animated">0</b> </span>
 		
 	</div>
@@ -48,11 +48,5 @@
 </aside>
 
 <div id="main" role="main">
-  <div id="ribbon">
-	  <ol class="breadcrumb pull-right">
-			<li>{{ro.campus.clave}} - {{ro.campus.descripcion}}</li>
-			<li>{{ro.seccion.descripcion}}</li>
-		</ol>
-  </div>
   <div id="content" ui-view></div>
 </div>
