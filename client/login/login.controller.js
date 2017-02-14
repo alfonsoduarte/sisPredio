@@ -1,5 +1,5 @@
 angular
-  .module('verificaciones')
+  .module('sisPredios')
   .controller('LoginCtrl', LoginCtrl);
  
 function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
@@ -13,6 +13,12 @@ function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
   };
 
   this.login = function () {
+	  
+	  //console.log(this.credentials.username);
+	  //console.log(this.credentials.password);
+	  
+	  this.credentials.username = this.credentials.username.replace("@", ".");
+	  
     $meteor.loginWithPassword(this.credentials.username, this.credentials.password).then(
 	    /*
 	    if (Meteor.user().profile.estatus == false && Meteor.user().profile.nombre != "Super Administrador")
@@ -33,6 +39,7 @@ function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
         $state.go('root.home');        
       },
       function (error) {
+
 	      if(error.reason == "Match failed"){
 		      toastr.error("Escriba su usuario y contraseña para iniciar");
 	      }else if(error.reason == "User not found"){

@@ -1,12 +1,11 @@
 
-angular.module('verificaciones',
+angular.module('sisPredios',
   [
     'angular-meteor',    
     'ngAnimate',
     'ngCookies',
     'ngSanitize',    
     'toastr',
-    //'ponchoXLSX',
     'ui.router',
     'ui.grid',
     'smartadmin',

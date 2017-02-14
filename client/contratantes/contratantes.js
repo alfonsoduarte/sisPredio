@@ -1,7 +1,7 @@
 angular
-.module("verificaciones")
-.controller("UsuariosCtrl", UsuariosCtrl);
-function UsuariosCtrl($scope, $meteor, $reactive,  $state, $stateParams, toastr) {
+.module("sisPredios")
+.controller("ContratantesCtrl", ContratantesCtrl);
+function ContratantesCtrl($scope, $meteor, $reactive,  $state, $stateParams, toastr) {
 
 	let rc = $reactive(this).attach($scope);
 

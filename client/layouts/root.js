@@ -1,4 +1,4 @@
-angular.module("verificaciones")
+angular.module("sisPredios")
 .controller("RootCtrl", RootCtrl);  
  function RootCtrl($scope, $meteor, $reactive, $state, $stateParams, toastr){
  	let rc = $reactive(this).attach($scope); 

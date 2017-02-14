@@ -38,4 +38,4 @@ rshashkov:angular-meteor-breadcrumb
 tmeasday:publish-counts
 angularutils:pagination
 huaming:js-xlsx
-shell-server
+shell-server@0.2.1

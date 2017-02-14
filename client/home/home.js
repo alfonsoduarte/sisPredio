@@ -1,7 +1,7 @@
 
 
 angular
-  .module('verificaciones')
+  .module('sisPredios')
   .controller('HomeCtrl', HomeCtrl);
  
 function HomeCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {

@@ -1,150 +1,31 @@
-<!--
-EJEMPLO DE COMO AGREGAR ELEMENTOS
-A LA BARRA LATERAL
-
-<ul data-smart-menu>
-  <li data-ui-sref-active="active">
-    <a data-ui-sref="app.dashboard" title="Dashboard">
-      <i class="fa fa-lg fa-fw fa-home"></i>
-      <span class="menu-item-parent">Dashboard</span>
-    </a>
-  </li>
-  <li data-menu-collapse>
-    <a href="#">
-      <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
-      <span class="menu-item-parent">Graphs</span>
-    </a>
-    <ul>
-      <li data-ui-sref-active="active">
-         <a data-ui-sref="app.graphs.flot">Flot Chart</a>
-      </li>
-      <li data-ui-sref-active="active">
-          <a data-ui-sref="app.graphs.morris">Morris Charts</a>
-      </li>
-    </ul>
-  </li>
-</ul>
--->
-
 <nav>
-	<ul data-smart-menu>
-	
-		  <li data-ui-sref-active="active">
-     	 <a ui-sref="root.usuarios" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'admin'">
+	<ul data-smart-menu>	
+		<!--	
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.usuarios" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
       	  <i class="fa fa-lg fa-fw fa-users"></i>
 					<span class="menu-item-parent">Usuarios</span>
 			 </a>
 		 </li>
+		 -->
 		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.zona" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'admin'">
+     	 <a ui-sref="root.usuarios" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
+      	  <i class="fa fa-lg fa-fw fa-money"></i>
+					<span class="menu-item-parent">Estado de Cuenta</span>
+			 </a>
+		 </li>
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.importarContratantes" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
       	  <i class="fa fa-lg fa-fw fa-university"></i>
-					<span class="menu-item-parent">Zona</span>
+					<span class="menu-item-parent">Importar Contratantes</span>
 			 </a>
 		 </li>
-		 
-     <li data-ui-sref-active="active">
-     	 <a ui-sref="root.importarfolios" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador'">
-      	  <i class="fa fa-lg fa-fw fa-arrow-circle-up"></i>
-					<span class="menu-item-parent">Importar Folios</span>
-			 </a>
-		 </li>
-
 		 <li data-ui-sref-active="active">
-      <a ui-sref="root.folios" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador'">
-        <i class="fa fa-lg fa-fw fa-folder-open"></i>
-        <span class="menu-item-parent">Crear folio</span>
-      </a>
-    </li>
-    
-     <li data-ui-sref-active="active">
-      <a ui-sref="root.panelFolios" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador' || currentUser.roles[0] == 'Logistica'">
-        <i class="fa fa-lg fa-fw fa-folder-o"></i>
-        <span class="menu-item-parent">Panel de Folios</span>
-      </a>
-    </li>
-    
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.buscarfolio" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador'">
-        <i class="fa fa-lg fa-fw fa-search"></i>
-        <span class="menu-item-parent">Buscar Folio</span>
-      </a>
-    </li>
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.buscarnombre" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador'">
-        <i class="fa fa-lg fa-fw fa-search"></i>
-        <span class="menu-item-parent">Buscar Nombre</span>
-      </a>
-    </li>
-
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.buscarfolio" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Logistica'">
-        <i class="fa fa-lg fa-fw fa-search"></i>
-        <span class="menu-item-parent">Buscar Folio</span>
-      </a>
-    </li>
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.buscarnombre" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Logistica'">
-        <i class="fa fa-lg fa-fw fa-search"></i>
-        <span class="menu-item-parent">Buscar Nombre</span>
-      </a>
-    </li>
-
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.zona" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Coordinador'">
-        <i class="fa fa-lg fa-fw fa-university"></i>
-        <span class="menu-item-parent">Zona</span>
-      </a>
-    </li>
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.zona" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Logistica'">
-        <i class="fa fa-lg fa-fw fa-university"></i>
-        <span class="menu-item-parent">Zona</span>
-      </a>
-    </li>
-    
-    
-    
-     
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.verificacion" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Verificador'">
-        <i class="fa fa-lg fa-fw fa-check-square"></i>
-        <span class="menu-item-parent">Verficaciones</span>
-      </a>
-    </li>
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.panelFoliosAnalista" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Analista'">
-        <i class="fa fa-lg fa-fw fa-folder-o"></i>
-        <span class="menu-item-parent">Panel de Folios</span>
-      </a>
-    </li>
-    
-    <li data-ui-sref-active="active">
-      <a ui-sref="root.direccionverificadores" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Director'">
-        <i class="fa fa-lg fa-fw fa-folder-o"></i>
-        <span class="menu-item-parent">Reporte por Verificadores</span>
-      </a>
-    </li>
-    
-     <li data-ui-sref-active="active">
-      <a ui-sref="root.direccionanalistas" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Director'">
-        <i class="fa fa-lg fa-fw fa-folder-o"></i>
-        <span class="menu-item-parent">Reporte por Analista</span>
-      </a>
-    </li>
-    
-     <li data-ui-sref-active="active">
-      <a ui-sref="root.direccionfolios" tilte="Verificaciones" ng-if="currentUser.roles[0] == 'Director'">
-        <i class="fa fa-lg fa-fw fa-folder-o"></i>
-        <span class="menu-item-parent">Reporte por Folios</span>
-      </a>
-    </li>
-
-    
+     	 <a ui-sref="root.importarMovimientos" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
+      	  <i class="fa fa-lg fa-fw fa-university"></i>
+					<span class="menu-item-parent">Importar Movimientos</span>
+			 </a>
+		 </li>
     
   </ul>
 </nav>

@@ -11,10 +11,10 @@
           <div class="widget-body">
 						<div class="row">
 							<div class="col-sm-3">
-								<a ui-sref="root.usuarios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-users"></i></span>Usuarios</a>
-							</div>			
+								<a ui-sref="root.importarContratantes" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Importar Contratantes</a>
+							</div>
 							<div class="col-sm-3">
-								<a ui-sref="root.zona" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Zona</a>
+								<a ui-sref="root.importarMovimientos" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Importar Movimientos</a>
 							</div>		
 						</div>
           </div>
@@ -25,7 +25,7 @@
 </section>
 
 <!-- Menú de Coordinador -->
-<section id="Coordinador" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Coordinador'">
+<section id="Coordinador" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Contratante'">
   <div class="row">
     <div class="col-sm-12">
       <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-jarvis-widget="data-jarvis-widget">
@@ -36,28 +36,9 @@
           <div class="widget-body">
 						<div class="row">
 							<div class="col-sm-3">
-								<a ui-sref="root.importarfolios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-arrow-circle-up"></i></span>Importar Folios</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.folios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-open"></i></span>Crear Folio</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.panelFolios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Panel de Folios</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.buscarfolio" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-search"></i></span>Buscar Folio</a>
+								<a ui-sref="root.estadoCuenta" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-arrow-circle-up"></i></span>Estado de Cuenta</a>
 							</div>
 						</div>
-          </div>
-          <div class="widget-body">
-          	<div class="row">
-	          	<div class="col-sm-3">
-								<a ui-sref="root.buscarnombre" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-search"></i></span>Buscar Nombre</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.ciudad" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Ciudades</a>
-							</div>			
-	          </div>
           </div>
         </div>
       </div>
@@ -65,85 +46,5 @@
   </div>
 </section>
 
-<!-- Menú de Logistica -->
-<section id="Logistica" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Logistica'">
-  <div class="row">
-    <div class="col-sm-12">
-      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-jarvis-widget="data-jarvis-widget">
-        <header>
-          <h2>Opciones del sistema</h2>
-        </header>
-        <div>
-          <div class="widget-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<a ui-sref="root.panelFolios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Panel de Folios</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.buscarfolio" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-search"></i></span>Buscar Folio</a>
-							</div>	
-							<div class="col-sm-3">
-								<a ui-sref="root.buscarnombre" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-search"></i></span>Buscar Nombre</a>
-							</div>
-							<div class="row">
-							<div class="col-sm-3">
-								<a ui-sref="root.ciudad" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Zonas</a>
-							</div>			
-						</div>	
-						</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Menú de Analista -->
-<section id="Analista" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Analista'">	
-  <div class="row">
-    <div class="col-sm-12">
-      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-jarvis-widget="data-jarvis-widget">
-        <header>
-          <h2>Opciones del sistema</h2>
-        </header>
-        <div>
-          <div class="widget-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<a ui-sref="root.panelFoliosAnalista" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Panel de Folios</a>
-							</div>
-						</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Menú de Director -->
-<section id="Director" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Director'">	
-  <div class="row">
-    <div class="col-sm-12">
-      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-jarvis-widget="data-jarvis-widget">
-        <header>
-          <h2>Opciones del sistema</h2>
-        </header>
-        <div>
-          <div class="widget-body">
-						<div class="row">
-							<div class="col-sm-3">
-								<a ui-sref="root.direccionverificadores" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Reporte por Verificadores</a>
-							</div>
-							<div class="col-sm-3">
-								<a ui-sref="root.direccionanalistas" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Reporte por Analista</a>
-							</div>
-							<div class="col-sm-3">
-									<a ui-sref="root.direccionfolios" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-folder-o"></i></span>Reporte por Folios</a>
-							</div>
-						</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
+ 
  
