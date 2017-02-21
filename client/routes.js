@@ -105,7 +105,7 @@ angular.module('sisPredios').config(['$injector', function ($injector) {
 	      }]
 	    }
     })
-    .state('root.estadoCuenta', {
+    .state('root.estadocuenta', {
       url: '/estadoCuenta',
       templateUrl: 'client/contratantes/estadocuenta.ng.html',
       controller: 'estadoCuentaCtrl as ecta',
