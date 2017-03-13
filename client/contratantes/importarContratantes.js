@@ -30,73 +30,24 @@ function ImportarContratantesCtrl($scope, $meteor, $reactive,  $state, $statePar
 		       return;
 		  }
 		  
-			Meteor.call('removeAllContratantes');		  
+		  $( "#guardar" ).prop( "disabled", true );
 			
-			_.each(rc.contratantesArreglo.Hoja1, function(contratante){
-		  					
-					var c = {Icontid:"",Cnomcomp:"",Cnombres:"",Capellidos:"",Crfc:"",Cdomicilio:"",Ctel1:"",Ctel2:"",Ctel3:"",Ccorreo:"",Ccorreo2:"",Icontacid:"",Nom_contacto:""};
-					c.Icontid = contratante.Icontid;
-					c.Cnomcomp = contratante.Cnomcomp.trim();
-							
-					c.Cnombres = contratante.Cnombres.trim();
-					c.Capellidos = contratante.Capellidos.trim();
-					c.Crfc = contratante.Crfc.trim();
-					c.Cdomicilio = contratante.Cdomicilio.trim();
-					c.Ctel1 = contratante.Ctel1.trim();
-					c.Ctel2 = contratante.Ctel2.trim();
-					c.Ctel3 = contratante.Ctel3.trim();
-					
-					c.Ccorreo = contratante.Ccorreo.trim();
-					c.Ccorreo2 = contratante.Ccorreo2.trim();
-					c.Icontacid = contratante.Icontacid;
-					c.Nom_contacto = contratante.Nom_contacto.trim();
-					//Preguntar si existe el contratante	
-					
-					var buscar = contratante.Ccorreo.trim();
-					buscar = contratante.Ccorreo.trim().replace("@", ".");//Reemplazar @ por .
-					Meteor.call('getContratante', buscar, function(error, result) {
-					   if(error)
-					   {
-						    console.log('ERROR :', error);
-						    return;
-					   }
-					   else if (result)//Ya existe
-					   {
-						   	//agregarlo a la colección Contratante
-						   	c.cuenta_id = result;	
-								Contratantes.insert(c);
-			  
-					   }
-					   else if (result===null)
-					   {
-
-						   	var cuentaUsuario = {};
-						   	cuentaUsuario.profile = {};
-						   	
-						   	cuentaUsuario.username = contratante.Ccorreo.trim().replace("@", ".");;
-						   	cuentaUsuario.password = '123qwe';
-						   	cuentaUsuario.profile.Icontid = contratante.Icontid;
-						   	
-								Meteor.call('createUsuario', cuentaUsuario, "Contratante", function(e, r) { 
+			Meteor.call('insertarContratantes',rc.contratantesArreglo.Hoja1, function(e, r) { 
+											console.log(r);
 											if (e)
 											{
 													console.log("Error:", e);
+													$( "#guardar" ).prop( "disabled", false );
 											}
 											else if (r)
 											{
-												c.cuenta_id = r;	
-												console.log(c);
-												console.log("a grabar contratante",c);
-												Contratantes.insert(c);	
+												console.log("Exito:", r);
+
+												rc.contratantesArreglo = {};
+												toastr.success('Proceso Terminado.');
+												$( "#guardar" ).prop( "disabled", false );									
 											}		
-								});
-								
-					   }
-					});
-		  });	  
-		  
-		  this.contratantesArreglo = {};
-		  toastr.success('Proceso Terminado.');
+			});
 		  
 	};
 		

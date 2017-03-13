@@ -8,10 +8,10 @@
 			    </div>			    			    
 			    <div class="row">
 						<div class="col-sm-3">
-							<input ng-click="icon.cargar()" value="Cargar" class="btn btn-primary"/>			
+							<input id="cargar" ng-click="icon.cargar()" value="Cargar" class="btn btn-primary"/>			
 						</div>
 						<div class="col-sm-3">
-							<input ng-click="icon.guardar()" value="Guardar" class="btn btn-primary"/>			
+							<input id="guardar" ng-click="icon.guardar()" value="Guardar" class="btn btn-primary"/>			
 						</div>
 					</div> 
 		  	</div> 	
@@ -24,6 +24,7 @@
 			<thead>
 				<tr>
 					<th width="5%"><div class="text-center">Id</div></th>
+					<th width="5%"><div class="text-center">Cuserweb</div></th>
 					<th width="15%"><div class="text-center">Nombre</div></th>
 					<th width="10%"><div class="text-center">RFC</div></th>
 					<th width="15%"><div class="text-center">Domicilio</div></th>
@@ -37,6 +38,7 @@
 			<tbody>
 		    <tr ng-repeat="contratante in icon.contratantesArreglo.Hoja1" ng-class="contratante.existe == true ? 'danger' : ''">
 		    	<td>{{contratante.Icontid}}</td>
+			    <td>{{contratante.Cuserweb}}</td>
 			    <td>{{contratante.Cnomcomp}}</td>
 			    <td>{{contratante.Crfc}}</td>
 			    <td>{{contratante.Cdomicilio}}</td>

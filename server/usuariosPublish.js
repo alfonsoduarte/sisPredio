@@ -5,3 +5,18 @@ Meteor.publish("usuarios",function(params){
 Meteor.publish("contratantes", function(){
 	return Roles.getUsersInRole( ['Contratante']);
 });
+
+
+
+Meteor.publish("buscarContratante",function(options){
+	
+	if (options != undefined)
+	{
+			let selector = {
+		  	"profile.nombreCompleto": { '$regex' : '.*' + options.where.nombreCompleto || '' + '.*', '$options' : 'i' },
+			  	roles : ["Contratante"]
+			}
+
+			return Meteor.users.find(selector,options.options);
+	}											  																						
+});

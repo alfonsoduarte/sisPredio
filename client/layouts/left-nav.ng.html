@@ -9,9 +9,15 @@
 		 </li>
 		 -->
 		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.usuarios" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
+     	 <a ui-sref="root.home" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
       	  <i class="fa fa-lg fa-fw fa-money"></i>
 					<span class="menu-item-parent">Estado de Cuenta</span>
+			 </a>
+		 </li>
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.cambioContrasena" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
+      	  <i class="fa fa-lg fa-fw fa-user"></i>
+					<span class="menu-item-parent">Cambiar Contraseña</span>
 			 </a>
 		 </li>
 		 <li data-ui-sref-active="active">
@@ -26,6 +32,13 @@
 					<span class="menu-item-parent">Importar Movimientos</span>
 			 </a>
 		 </li>
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.listarContratantes" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
+      	  <i class="fa fa-lg fa-fw fa-users"></i>
+					<span class="menu-item-parent">Cambiar Contraseña</span>
+			 </a>
+		 </li>
+		 
     
   </ul>
 </nav>

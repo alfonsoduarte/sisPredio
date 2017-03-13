@@ -1,134 +1,62 @@
-<h2>Estado Cuenta</h2>
+<h2>Estado Cuenta: <bold>{{currentUser.profile.nombreCompleto}} </bold></h2>
 
+<div class="row" ng-repeat="movimiento in ecta.movimientos">
+	<div class="well">
+		<div class="col-sm-12">
+				<div class="col-sm-2"> 					    
+				    	<label>PREDIO:</label>
+				    	<span>{{movimiento.Nom_predio}}</span>
+				</div>
+				<div class="col-sm-2"> 					    
+				    	<label>PREDIO:</label>
+				    	<span>{{movimiento.Nom_programa}}</span>
+				</div>
+				<div class="col-sm-2"> 					    
+				    	<label>MANZANA:</label>
+				    	<span>{{movimiento.Imanz}}</span>
+				</div>
+				<div class="col-sm-2"> 					    
+				    	<label>LOTE:</label>
+				    	<span>{{movimiento.Ilote}}</span>
+				</div>
+				<div class="col-sm-2"> 					    
+				    	<label>PRECIO:</label>
+				    	<span>{{movimiento.Precio | currency}}</span>
+				</div>	
+		</div>		
 
-	<div class="row" ng-repeat="movimiento in ecta.movimientos">
-		<div class="well">
-			<div class="col-sm-12">
-					<div class="col-sm-4"> 					    
-					    	<bold><label>NOMBRE:</label></bold>
-					    	<span>{{movimiento.Cnomcomp}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>PREDIO:</label>
-					    	<span>{{movimiento.Nom_predio}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>PREDIO:</label>
-					    	<span>{{movimiento.Nom_programa}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>MANZANA:</label>
-					    	<span>{{movimiento.Imanz}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>LOTE:</label>
-					    	<span>{{movimiento.Ilote}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>PRECIO:</label>
-					    	<span>{{movimiento.Precio}}</span>
-					</div>	
-			</div>		
-	
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-							<th width="5%"><div class="text-center">Recibo</th>
-							<th width="5%"><div class="text-center">Fecha Pago</th>
-							<th width="5%"><div class="text-center">Capital</th>
-							<th width="5%"><div class="text-center">C. ADMVA</th>
-							<th width="5%"><div class="text-center">Seg. Vida</th>
-							<th width="5%"><div class="text-center">Interes</th>
-							<th width="5%"><div class="text-center">Interes Moratorio</th>
-							<th width="5%"><div class="text-center">Total</th>
-							<th width="5%"><div class="text-center">Saldo</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="recibo in movimiento.recibos">
-							<td class="text-center" >{{recibo.recibo}}</td>
-					    <td class="text-center">{{recibo.fechaPago}}</td>
-					    <td class="text-right">{{recibo.capital | currency}}</td>
-					    <td class="text-right">{{recibo.administrativa | currency}}</td>
-					    <td class="text-right">{{recibo.seguro | currency}}</td>
-					    <td class="text-right">{{recibo.interes | currency}}</td>
-					    <td class="text-right">{{recibo.interesMoratorio | currency}}</td>
-					    <td class="text-right">{{recibo.importe | currency}}</td>
-					    <td class="text-right">{{recibo.saldo | currency}}</td>
-					</tr>	
-				</tbody>
-  		</table>	
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+						<th width="5%"><div class="text-center">Recibo</th>
+						<th width="5%"><div class="text-center">Fecha Pago</th>
+						<th width="5%"><div class="text-center">Saldo Capital</th>
+						<th width="5%"><div class="text-center">Capital</th>
+						<th width="5%"><div class="text-center">C. ADMVA</th>
+						<th width="5%"><div class="text-center">Seg. Vida</th>
+						<th width="5%"><div class="text-center">Interes</th>
+						<th width="5%"><div class="text-center">Interes Moratorio</th>
+						<th width="5%"><div class="text-center">Total</th>
+						<th width="5%"><div class="text-center">Saldo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="recibo in movimiento.recibos">
+						<td class="text-center" >{{recibo.recibo}}</td>
+				    <td class="text-center">{{recibo.fechaPago}}</td>
+				    <td class="text-right">{{recibo.saldoCapital | currency}}</td>
+				    <td class="text-right">{{recibo.capital | currency}}</td>
+				    <td class="text-right">{{recibo.administrativa | currency}}</td>
+				    <td class="text-right">{{recibo.seguro | currency}}</td>
+				    <td class="text-right">{{recibo.interes | currency}}</td>
+				    <td class="text-right">{{recibo.interesMoratorio | currency}}</td>
+				    <td class="text-right">{{recibo.total | currency}}</td>
+				    <td class="text-right">{{recibo.saldo | currency}}</td>
+				</tr>	
+			</tbody>
+		</table>	
 	
 	</div>
 </div>		
 
-<!--
-
-<div class="row">
-	<div class="col-sm-12">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th width="5%"><div class="text-center">Id</div></th>
-					<th width="15%"><div class="text-center">Nombre</div></th>
-					<th width="5%"><div class="text-center">Id Predio</div></th>
-					<th width="5%"><div class="text-center">Predio</div></th>
-					<th width="5%"><div class="text-center">Programa</div></th>
-					<th width="5%"><div class="text-center">Manzana</div></th>
-					<th width="5%"><div class="text-center">Lote</div></th>
-					<th width="5%"><div class="text-center">Crédito</div></th>
-					<th width="5%"><div class="text-center">Precio</div></th>
-					<!--
-					<th width="5%"><div class="text-center">Recibo</div></th>
-					<th width="5%"><div class="text-center">F. Pago</div></th>
-					<th width="5%"><div class="text-center">Cap Mov</div></th>
-					<th width="5%"><div class="text-center">Ca Mov</div></th>
-					<th width="5%"><div class="text-center">Sv Mov</div></th>
-					<th width="5%"><div class="text-center">Int Mov</div></th>
-					<th width="5%"><div class="text-center">Int Mor MOv</div></th>
-
-				</tr>
-			</thead>
-			<tbody>
-		    <tr ng-repeat="movimiento in ecta.movimientos">
-		    	<td>{{movimiento.Icontid}}</td>
-			    <td>{{movimiento.Cnomcomp}}</td>
-			    <td>{{movimiento.Ipredid}}</td>
-			    <td>{{movimiento.Nom_predio}}</td>
-			    <td>{{movimiento.Nom_programa}}</td>
-			    <td>{{movimiento.Imanz}}</td>
-			    <td>{{movimiento.Ilote}}</td>
-			    <td>{{movimiento.Icredid}}</td>
-			    <td>{{movimiento.Precio}}</td>
-			    		<table class="table table-bordered">
-								<thead>
-									<tr>
-											<th width="5%"><div class="text-center">Recibo</div></th>
-											<th width="5%"><div class="text-center">F. Pago</div></th>
-											<th width="5%"><div class="text-center">Cap Mov</div></th>
-											<th width="5%"><div class="text-center">Ca Mov</div></th>
-											<th width="5%"><div class="text-center">Sv Mov</div></th>
-											<th width="5%"><div class="text-center">Int Mov</div></th>
-											<th width="5%"><div class="text-center">Int Mor MOv</div></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="recibo in movimiento.recibos">
-											<td>{{recibo.Irecibo}}</td>
-									    <td>{{recibo.Fpago}}</td>
-									    <td>{{recibo.Capmov}}</td>
-									    <td>{{recibo.Camov}}</td>
-									    <td>{{recibo.Svmov}}</td>
-									    <td>{{recibo.Intmov}}</td>
-									    <td>{{recibo.Intmormov}}</td>
-									</tr>	
-								</tbody>
-			    		</table>	
-		    </tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
--->
 

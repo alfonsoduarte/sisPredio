@@ -17,7 +17,7 @@ function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
 	  //console.log(this.credentials.username);
 	  //console.log(this.credentials.password);
 	  
-	  this.credentials.username = this.credentials.username.replace("@", ".");
+	  //this.credentials.username = this.credentials.username.replace("@", ".");
 	  
     $meteor.loginWithPassword(this.credentials.username, this.credentials.password).then(
 	    /*

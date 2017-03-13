@@ -28,20 +28,21 @@ function ImportarMovimientosCtrl($scope, $meteor, $reactive,  $state, $statePara
 		       return;
 		  }
 		  
-			Meteor.call('removeAllMovimientos');
+		  $( "#guardar" ).prop( "disabled", true );
 			
 			Meteor.call('insertarMovimientos',rc.movimientosArreglo.Hoja1, function(e, r) { 
 											console.log(r);
 											if (e)
 											{
 													console.log("Error:", e);
+													$( "#guardar" ).prop( "disabled", false );
 											}
 											else if (r)
 											{
 												console.log(r);
-
 												rc.movimientosArreglo = {};
-												toastr.success('Proceso Terminado.');											
+												toastr.success('Proceso Terminado.');		
+												$( "#guardar" ).prop( "disabled", false );									
 											}		
 			});		  
 		  

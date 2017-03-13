@@ -114,6 +114,25 @@ angular.module('sisPredios').config(['$injector', function ($injector) {
 	        return $meteor.requireUser();
 	      }]
 	    }
+    })
+    .state('root.cambioContrasena', {
+      url: '/cambioContrasena/:id',
+      templateUrl: 'client/contratantes/cambioContrasena.ng.html',
+      controller: 'cambioContrasenaCtrl as pwd',
+      resolve: {
+	      "currentUser": ["$meteor", function($meteor){
+	        return $meteor.requireUser();
+	      }]
+	    }
     }) 
-    
+    .state('root.listarContratantes', {
+      url: '/listarContratantes',
+      templateUrl: 'client/contratantes/listarContratantes.ng.html',
+      controller: 'listarContratantesCtrl as con',
+      resolve: {
+	      "currentUser": ["$meteor", function($meteor){
+	        return $meteor.requireUser();
+	      }]
+	    }
+    })
 }]);     
