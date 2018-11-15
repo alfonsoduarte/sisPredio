@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+				Apoyos a la Parroquia
+		</h1>
+	</div>
+</div>
+
+<div class="well">
+	<div class="row">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="25%"><div class="text-center">Nombre</div></th>
+						<th width="30%"><div class="text-center">Descripción</div></th>
+						<th width="10%"><div class="text-center">Tipo</div></th>
+						<th width="10%"><div class="text-center">Arancel</div></th>
+						<th width="10%"><div class="text-center">Apoyo</div></th>
+						<th class="text-center" width="5%"><div class="text-center"></div></th>
+					</tr>
+				</thead>
+				<tbody>
+			    <tr ng-repeat="objeto in apo.arreglo">
+				    <td class="text-left">{{objeto.nombre}}</td>
+				    <td class="text-left">{{objeto.descripcion}}</td>
+				    <td class="text-left">{{objeto.tipo}}</td>
+				    <td class="text-right">{{objeto.arancel | currency}}</td>
+				    <td class="text-right">{{objeto.apoyo | currency}}</td>
+					    
+				    </td>
+				    <td>
+						    <div class="text-center">
+							    <div class="btn-group">
+									  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    <span class="caret"></span>
+									    <span class="sr-only">Toggle Dropdown</span>
+									  </button>
+									  <ul class="dropdown-menu dropdown-menu-right text-left">
+									    <li><a href="#" ng-click="apo.editarApoyo(objeto)">Editar Apoyo</a></li>
+									  </ul>
+									</div>
+						    </div>				    
+						</td>
+			    </tr>
+				</tbody>
+			</table>
+			
+	</div>
+</div>	
+
+
+<div id="modalApoyo" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Especificar Apoyo para {{apo.estipendio.nombre}}</h4>
+		    </div>
+				<div class="modal-body">
+						<div class="well">	    
+					    <div class="row">
+									<div class="col-sm-4" valida>
+											<label>Valor *</label>
+											<input name="valor" type="number" min="0" class="form-control" ng-model="apo.valor" required="">
+									</div>			
+					    </div>	
+						</div>  	
+	      </div>	
+	      <div class="modal-footer">
+		        <input type="submit" ng-click="apo.actualizarApoyo(apo.valor, form2 )" value="Actualizar" class="btn btn-success" valida-form formulario="form2">
+		        <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+

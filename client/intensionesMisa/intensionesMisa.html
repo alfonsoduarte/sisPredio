@@ -1,0 +1,245 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+				Intenciones de Misa
+		</h1>
+	</div>
+</div>
+
+<div class="well">
+	<div class="row">	
+		<div class="col-sm-3">
+				<label>Fecha </label>
+				<input name="fechaConsulta" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="intM.fecha">
+		</div>
+		<div class="col-sm-2">
+			<label>Hora</label>
+			<select name="hora" class="form-control select2" placeholder="Seleccione" ng-change="intM.porHora(intM.hora)" ng-model="intM.hora">
+				<option ng-repeat="obj in intM.horas" value="{{obj}}">{{obj | date:"h:mm a"}}</option>
+			</select>
+		</div>	
+		<div class="col-sm-3">
+				<br/>
+				<a href="javascript:void(0);" class="btn btn-primary " ng-click="intM.imprimir()" ><i class="fa fa-print"></i> Imprimir</a>
+		</div>
+	
+		<div class="col-sm-1" ng-if = "intM.porPagar">
+			<br/>
+			<a href="" ng-click="intM.pagarIntenciones()" class="btn btn-default btn-success">
+					<i class="fa fa-plus"></i> Pagar
+			</a>
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-sm-6">
+		    <label>Santoral</label>
+	    	<input name="santoral" type="text" class="form-control" placeholder="Santoral" ng-model="intM.santoral" disabled="true">
+	    </div>
+	    
+	    <div class="col-sm-6">
+		    <label>Tiempo Litúrgico</label>
+	    	<input name="tiempoLiturgico" type="text" class="form-control" placeholder="Tiempo Litúrgico" ng-model="intM.tiempoLiturgico" disabled="true">
+	    </div>
+			
+	</div>	
+	
+</div>
+
+
+<div class="jarviswidget jarviswidget-sortable" id="wid-id-11" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" role="widget">
+		<header role="heading">
+		<!--<h2><strong>Panel de Folios </strong></h2>-->
+		
+		<ul id="widget-tab-1" class="nav nav-tabs pull-left">
+
+			<li class="active">
+				<a data-toggle="tab" href="#hr1" aria-expanded="false"> <i class="fa fa-lg fa-calendar-o"></i>
+					 <span class="hidden-mobile hidden-tablet">Intenciones de Misa</span>
+					 <span class="badge bg-color-blue txt-color-white">{{intM.arreglo.length}}</span>
+				</a>
+			</li>
+			
+			<li class="">
+				<a data-toggle="tab" href="#hr2" aria-expanded="false"> <i class="fa fa-lg fa-calendar"></i> 
+					<span class="hidden-mobile hidden-tablet"> Celebraciones</span>
+					<span class="badge bg-color-blue txt-color-white">{{intM.agenda.length}}</span>
+				</a>
+			</li>
+
+		</ul>	
+		
+	<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
+	<!-- widget div-->
+	<div role="content">
+		
+		<!-- widget edit box -->
+		<div class="jarviswidget-editbox">
+			<!-- This area used as dropdown edit box -->
+			
+		</div>
+		<!-- end widget edit box -->
+		
+		<!-- widget content -->
+		<div class="widget-body no-padding">
+
+			<!-- widget body text-->
+			
+			<div class="tab-content padding-10">
+				
+				<div class="tab-pane fade active in" id="hr1">
+						<div class="row">
+							<div class="col-sm-12">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="text-center" width="2%"><div class="text-center">Num.</div></th>
+											<th class="text-center" width="10%"><div class="text-center">Hora</div></th>
+											<th class="text-center" width="15%"><div class="text-center">Tipo</div></th>
+											<th class="text-center" width="15%"><div class="text-center">Intención</div></th>
+											<th class="text-center" width="30%"><div class="text-center">Texto</div></th>
+											<th class="text-center" width="10%"><div class="text-center">Estatus</div></th>
+											<th class="text-center" width="5%"><div class="text-center">Acción</div></th>
+										</tr>
+									</thead>
+									<tbody>
+								    <tr ng-repeat="objeto in intM.arreglo">
+									    <td class="text-center">{{$index + 1}}</td>
+									    <td class="text-center">{{objeto.hora | date:"h:mm a"}}</td>
+									    <td class="text-left">{{objeto.tipo}}</td>
+									    <td class="text-left">{{objeto.intencion}}</td>
+									    <td class="text-left">{{objeto.concepto}}</td>
+									    <td class="text-left">
+										     <div class="text-center">
+									    	<span ng-if="!objeto.estatus" class="label label-success">
+												  Pagado
+												</span>
+												<span ng-if="objeto.estatus" class="label label-warning">
+												  Pendiente
+												</span>
+									    </div>
+										    
+									    </td>
+									    <td class="text-left">
+												<a href="#" ng-click="intM.modificarIntencion(objeto)" class="[ btn btn-primary ]"><i class="[ glyphicon glyphicon-pencil ]"></i></a>
+										  </td>
+								    </tr>
+									</tbody>
+								</table>
+							</div>	
+						</div>
+				</div>
+				
+				<div class="tab-pane fade" id="hr2">
+						<div class="row">
+							<div class="col-sm-12">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="text-center" width="2%"><div class="text-center">Num.</div></th>
+											<th class="text-center" width="10%"><div class="text-center">Hora</div></th>
+											<th class="text-center" width="15%"><div class="text-center">Celebración</div></th>
+											<th class="text-center" width="30%"><div class="text-center">Texto</div></th>
+											<th class="text-center" width="10%"><div class="text-center">Estatus</div></th>
+										</tr>
+									</thead>
+									<tbody>
+								    <tr ng-repeat="objeto in intM.agenda">
+									    <td class="text-center">{{$index + 1}}</td>
+									    <td class="text-center">{{objeto.hora | date:"h:mm a"}}</td>
+									    <td class="text-left">{{objeto.estipendio}}</td>
+									    <td class="text-left">{{objeto.concepto}}</td>
+									    <td class="text-left">
+										     <div class="text-center">
+									    	<span ng-if="!objeto.esAbono" class="label label-success">
+												  Pagado
+												</span>
+												<span ng-if="objeto.esAbono" class="label label-warning">
+												  Pendiente
+												</span>
+									    </div>
+										    
+									    </td>
+								    </tr>
+									</tbody>
+								</table>
+							</div>	
+						</div>
+				</div>
+				
+			</div>
+			<!-- end widget body text-->
+			
+			<!-- widget footer -->
+			<div class="widget-footer text-right">
+				Panel de Notificaciones
+			</div>
+			<!-- end widget footer -->
+			
+		</div>
+		<!-- end widget content -->
+		
+	</div>
+	<!-- end widget div -->
+	
+</div>
+
+
+
+
+<div id="modalintencionesMisa" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Editar Intención de Misa</h4>
+		    </div>
+				<div class="modal-body">
+						<div class="well">	    
+					    <div class="row">
+									<div class="col-sm-3" valida>
+											<label>Fecha Intención *</label>
+											<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" ng-model="intM.objetoEditar.fecha" required="">
+									</div>			
+									<div class="col-sm-3" valida>
+							    	<label>Hora *</label>	
+							    	<input name="hora" type="time" class="form-control" ng-model="intM.objetoEditar.hora" required>																
+						    	</div>
+						    	
+						    	<div class="col-sm-6" valida>
+								    <label for="intencion">Intención *</label>
+								    <select name="intencion" ng-model="intM.objetoEditar.intencion" class="form-control" required>
+									    <option value=""></option>
+									    <option value="ACCIÓN DE GRACIAS">Acción de gracias</option>
+									    <option value="BODAS DE ORO">Bodas de oro</option>
+									    <option value="BODAS DE PLATA">Bodas de plata</option>
+									    <option value="ETERNO DESCANSO">Eterno descanso</option>
+									    <option value="ETERNO DESCANSO, CUERPO PRESENTE">Eterno descanso cuerpo presente</option>
+									    <option value="GRADUACIÓN">Graduación</option>
+											<option value="MATRIMONIO">Matrimonio</option>	
+									    <option value="POR LA SALUD">Por la salud</option>
+									    <option value="POR UNA NECESIDAD">Por una necesidad</option>
+									    <option value="ANIMAS DEL PURGATORIO">Animas del purgatorio</option>
+										</select>
+						    	</div>
+						    	
+					    </div>		
+						 	<div class="row">   	
+						    		    	
+						    	<div class="col-sm-12" valida>
+											<label>Concepto *</label>
+											<input name="concepto" type="text" class="form-control" pleceholder = "concepto" ng-model="intM.objetoEditar.concepto" required="" capitalize>
+									</div>
+					    </div>							
+	      </div>	
+	      <div class="modal-footer">
+		        <input type="submit" ng-click="intM.ActualizarIntencion(intM.objetoEditar, form2)" value="Actualizar" class="btn btn-success" valida-form formulario="form2">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+

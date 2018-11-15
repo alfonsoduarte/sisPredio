@@ -1,0 +1,325 @@
+<h2><span ng-if = "bau.action">Nuevo</span> <span ng-if = "!bau.action">Actualizar</span> Bautismo</h2>
+<div class="row">
+	<div class="col-sm-12">
+		
+		<form name="form" class="form-horizontal" role="form">
+		  	<div class="well">
+			  	
+			  	<div class="row">
+				  		<div class="col-sm-3" valida>
+								<label >Lugar Sacerdote *</label>
+								<select name="tipoSacerdote" ng-model="bau.objeto.tipoSacerdote" ng-change="bau.cargarSacerdotes()" class="form-control" required>
+										<option value="PARROQUIA">PARROQUIA</option>
+										<option value="DIOCESIS">DIOCESIS</option>
+										<option value="OTRO">OTRO</option>
+										<option value="IMPORTADO" ng-if = "bau.objeto.tipoSacerdote == 'IMPORTADO'" >IMPORTADO</option>
+	 							</select>
+							</div>
+							
+							<div class="col-sm-3" valida>
+								<label >Tipo *</label>
+								<select name="tipo" ng-model="bau.objeto.tipo" class="form-control" required>
+										<option value="SACERDOTE">SACERDOTE</option>
+										<option value="DIACONO">DIACONO</option>
+	 							</select>
+							</div>
+							
+							<div class="col-sm-4" ng-if=" ( bau.objeto.tipoSacerdote == 'PARROQUIA' || bau.objeto.tipoSacerdote == 'DIOCESIS' ) && bau.objeto.tipo == 'SACERDOTE'" valida>
+								<label for="sacerdote_id">Sacerdote *</label>
+								<select name="sacerdote_id" class="js-example-basic-single js-states form-control" ng-model="bau.objeto.sacerdote_id" ng-selected="bau.seleccionaSacerdotesAsistio()" required>
+									<option ng-repeat="sac in bau.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+								</select>
+							</div>
+							
+							<div class="col-sm-4" ng-if=" ( bau.objeto.tipoSacerdote == 'PARROQUIA' || bau.objeto.tipoSacerdote == 'DIOCESIS' ) && bau.objeto.tipo == 'DIACONO'" valida>
+								<label for="sacerdote_id">Diácono *</label>
+								<select name="sacerdote_id" class="js-example-basic-single js-states form-control" ng-model="bau.objeto.sacerdote_id" ng-selected="bau.seleccionaSacerdotesAsistio()" required>
+									<option ng-repeat="dia in bau.diaconos" value="{{dia._id}}">{{dia.profile.nombreCompleto}}</option>
+								</select>
+							</div>	
+							
+<!--
+							<div class="col-sm-4" ng-if="bau.objeto.tipoSacerdote == 'OTRO' || bau.objeto.tipoSacerdote == 'IMPORTADO'"  valida>
+								<label>Sacerdote *</label>
+								<input name="fornaneo" type="text" class="form-control" placeholder="Sacerdote" ng-model="bau.objeto.sacerdoteNombre" required="" capitalize>
+							</div>
+-->
+
+			  	</div>
+
+			  	<div class="row">		
+							<div class="col-sm-6" valida>
+								<label>Asistió *</label>
+								<input name="sacerdoteNombre" type="text" class="form-control" placeholder="Sacerdote" ng-model="bau.objeto.sacerdoteNombre" required="" capitalize>
+							</div>			  	
+			  	
+			  	</div>
+			  	<div class="row">
+						<div class="col-sm-3" valida>					    
+							<label>Fecha bautizo *</label>
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="bau.objeto.fecha" required="">
+						</div>	
+						<div class="col-sm-3" valida>
+							<label >Estatus *</label>
+							<select name="estatus" ng-model="bau.objeto.estatus" data-placeholder="Seleccione" ng-change="bau.cambiarEstatus()" class="form-control" required >
+									<option value=""></option>
+									<option value="bautizado">Bautizado</option>
+									<option value="enTramite">En trámite</option>
+							</select>
+						</div>
+						<div class="col-sm-2" valida> 					    
+							<label>Libro *</label>
+							<input name="libro" type="text" class="form-control" placeholder="Libro" ng-model="bau.objeto.libro" ng-disabled = "bau.estatus" required capitalize>
+						</div>
+						<div class="col-sm-2" valida>					    
+							<label>Foja *</label>
+							<input name="foja" type="text" class="form-control" placeholder="Foja" ng-model="bau.objeto.foja" ng-disabled = "bau.estatus"  required capitalize>
+						</div>		    				    	    
+						<div class="col-sm-2" valida>					    
+							<label>No. de Acta *</label>
+							<input name="noActa" type="text" class="form-control" placeholder="No. dec Acta" ng-model="bau.objeto.noDeActa" ng-disabled = "bau.estatus" required capitalize>
+						</div>
+					</div>
+			  	
+					<div class="row">
+							<div class="col-sm-4" valida>
+						    <label>Nombre *</label>
+					    	<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="bau.objeto.nombre" required capitalize>
+					    </div>
+					    <div class="col-sm-4" valida>
+						    <label>Apellido Paterno</label>
+					    	<input name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno" ng-model="bau.objeto.apellidoPaterno" capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Apellido Materno</label>
+					    	<input name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" ng-model="bau.objeto.apellidoMaterno" capitalize>
+					    </div>
+					</div>	
+					
+					<div class="row">
+						<div class="col-sm-4" valida> 					    
+							<label>Lugar de Nacimiento *</label>
+							<input name="lugarNacimiento" type="text" class="form-control" placeholder="Lugar de Nacimiento" ng-model="bau.objeto.lugarNacimiento" required="" capitalize>
+						</div>
+						
+						<div class="col-sm-4">					    
+							<label>Fecha Nacimiento *</label>
+							<input name="fechaNacimiento" type="date" format="dd/MM/yyyy" class="form-control" ng-model="bau.objeto.fechaNacimiento" required="">
+						</div>
+						
+						<!--
+<div class="col-sm-4" valida>
+							<label >Tipo Hijo *</label>
+							<select name="tipoHijo" ng-model="bau.objeto.tipoHijo" data-placeholder="Seleccione" class="form-control" required >
+									<option value=""></option>
+									<option value="NATURAL">NATURAL</option>
+									<option value="LEGÍTIMO">LEGÍTIMO</option>
+							</select>
+						</div>
+-->
+ 						<div class="col-sm-4" valida>
+
+							<label for="esHijo">Es *</label>
+							<select name="esHijo" ng-model="bau.objeto.esHijo" data-placeholder="Seleccione" class="form-control" required>
+									<option value=""></option>
+									<option value="HIJO">HIJO</option>
+									<option value="HIJA">HIJA</option>
+							</select>
+						</div>						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Padre</label>
+							<input name="padre" type="text" class="form-control" placeholder="Padre" ng-model="bau.objeto.padre" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Madre</label>
+							<input name="madre" type="text" class="form-control" placeholder="Madre" ng-model="bau.objeto.madre" capitalize>
+						</div>
+						
+					</div>	
+					
+					<div class="row">
+						<div class="col-sm-6">					    
+							<label>Abuelo Paterno</label>
+							<input name="abueloPaterno" type="text" class="form-control" placeholder="Abuelo Paterno" ng-model="bau.objeto.abueloPaterno" capitalize>
+						</div>
+						<div class="col-sm-6">					    
+							<label>Abuela Paterno</label>
+							<input name="abuelaPaterno" type="text" class="form-control" placeholder="Abuela Paterno" ng-model="bau.objeto.abuelaPaterna" capitalize>
+						</div>
+						
+					</div>	
+
+					<div class="row">
+						<div class="col-sm-6">					    
+							<label>Abuelo Materno</label>
+							<input name="abueloMaterno" type="text" class="form-control" placeholder="Abuelo Materno" ng-model="bau.objeto.abueloMaterno" capitalize>
+						</div>
+						<div class="col-sm-6">					    
+							<label>Abuela Materno</label>
+							<input name="abuelaMaterno" type="text" class="form-control" placeholder="Abuela Materno" ng-model="bau.objeto.abuelaMaterna" capitalize>
+						</div>
+					</div>	
+					
+					<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Padrino *</label>
+							<input name="padrino" type="text" class="form-control" placeholder="Padrino" ng-model="bau.objeto.padrino" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Madrina *</label>
+							<input name="madrina" type="text" class="form-control" placeholder="Madrina" ng-model="bau.objeto.madrina" required="" capitalize>
+						</div>
+						
+					</div>	
+					
+					<div class="row">
+						<div class="col-sm-4">					    
+							<label>Registro Civil No.</label>
+							<input name="registroCivil" type="text" class="form-control" placeholder="Registro Civil No." ng-model="bau.objeto.registroCivil"  capitalize>
+						</div>
+						<div class="col-sm-4">					    
+							<label>Lugar </label>
+							<input name="lugar" type="text" class="form-control" placeholder="Lugar" ng-model="bau.objeto.lugar" capitalize>
+						</div>
+						<div class="col-sm-4">					    
+							<label>Fecha Registro </label>
+							<input name="fechaRegistro" type="date" format="dd/MM/yyyy" class="form-control" ng-model="bau.objeto.fechaRegistro" >
+						</div>						
+					</div>
+					
+					<div class="row" ng-if="bau.objeto.estatus == 'bautizado'">
+						
+						<div class="col-sm-4" valida>
+							<label >Tipo Sacerdote Para Constancia *</label>
+							<select name="tipoSacerdoteParroco" ng-model="bau.objeto.tipoSacerdoteParroco" ng-change="bau.cargarSacerdotesParroquia()" class="form-control" required>
+									<option value=""></option>
+									<option value="PARROQUIA">PARROQUIA</option>
+									<option value="OTRO">OTRO</option>
+ 							</select>
+						</div>
+						
+						<div class="col-sm-4" ng-if="bau.objeto.tipoSacerdoteParroco == 'PARROQUIA'" ng-selected="bau.seleccionaSacerdotesParroquia()" valida>
+							<label for="sacerdoteParroco_id">Sacerdote *</label>
+							<select name="sacerdoteParroco_id" class="js-example-basic-single js-states form-control" ng-model="bau.objeto.sacerdoteParroco_id" required>
+								<option ng-repeat="sac in bau.sacerdotesConstancia" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>						
+<!--
+						<div class="col-sm-4" ng-if="bau.objeto.tipoSacerdoteParroco == 'OTRO'" valida>
+							<label>Pbro. Firmó Constancia *</label>
+							<input name="fornaneoConstancia" type="text" class="form-control" placeholder="Sacerdote" ng-model="bau.objeto.parroco" required="" capitalize>
+						</div>
+-->
+					</div>
+					
+					<div class="row" ng-if="bau.objeto.estatus == 'bautizado'">	
+						<div class="col-sm-6" valida>
+							<label>Pbro. Firmó Constancia *</label>
+							<input name="fornaneoConstancia" type="text" class="form-control" placeholder="Sacerdote" ng-model="bau.objeto.parroco" required="" capitalize>
+						</div>
+					</div>
+					
+		  	</div>  
+		  	
+		  	<!--
+<h4>Nota al Margen</h4>
+		  	<div class="well" >
+		  		<div class="row">
+						<div class="col-sm-12">					    
+							<label>Nota </label>
+							<input name="notaAlMargen" type="text" class="form-control" placeholder="Nota Al Margen" ng-model="bau.objeto.notaAlMargen" capitalize>
+						</div>
+					</div>
+		  	</div>
+-->
+		  	
+		  	<h4>Notas Marginales</h4>
+		  	<div class="well" >
+			  	<form  name="formNM" class="form-horizontal" role="form">
+			  		<div class="row">
+								<div class="col-sm-3"  >
+									<label >Tipo de Nota Marginal *</label>
+									<select name="sacramento" ng-model="bau.notaMarginal.tipoNota"  class="form-control"  ng-disabled = "bau.estatus">
+											<option value=""></option>
+											<option value="CONFIRMACIÓN">CONFIRMACIÓN</option>
+											<option value="PRIMERA COMUNIÓN">PRIMERA COMUNIÓN</option> 
+											<option value="MATRIMONIO">MATRIMONIO</option>
+											<option value="ÓRDEN SACERDOTAL">ÓRDEN SACERDOTAL</option>
+											<option value="ANULACIÓN MATRIMONIAL">ANULAR MATRIMONIO</option>
+											<option value="VIUDEZ">VIUDEZ</option>
+											<option value="DECRETO DE CORRECCIÓN">DECRETO DE CORRECCIÓN</option>
+  		 							</select>
+								</div>
+								<div class="col-sm-3"  >					    
+									<label>Fecha *</label>
+									<input name="fechaNotaMarginal" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="bau.notaMarginal.fecha"  ng-disabled = "bau.estatus"  >
+								</div>  
+ 			  		</div>
+ 			  		<div class="row">
+	 			  			<div class="col-sm-12"  >					    
+									<label>Nota *</label>
+									<input name="notaNotaMarginal" type="text" class="form-control" placeholder="Nota" ng-model="bau.notaMarginal.nota" ng-disabled = "bau.estatus"  capitalize>
+								</div>
+ 			  		</div>
+ 			  		<div class="row">
+	 			  			<div class="col-sm-12"  >					    
+									<label>Lugar</label>
+									<input name="lugarNotaMarginal" type="text" class="form-control" placeholder="Lugar" ng-model="bau.notaMarginal.lugar" ng-disabled = "bau.estatus" capitalize>
+								</div>
+ 			  		</div>
+ 			  		<br>
+ 			  		<div class="row">
+	 			  			<div class="col-sm-3">
+	 			  				<input type="button" ng-click="bau.agregar(bau.notaMarginal)" class="btn btn-warning" ng-show="bau.actionArreglo" value="Agregar" ng-disabled = "bau.estatus">
+	 			  				<input type="button" ng-click="bau.actualizarNotaMarginal(bau.notaMarginal)" class="btn btn-warning" ng-show="!bau.actionArreglo" value="Actualizar" ng-disabled = "bau.estatus">
+	 								<input type="button" ng-click="bau.cancelarNotaMarginal()" value="Cancelar" ng-show="!bau.actionArreglo" class="btn btn-danger" ng-disabled = "bau.estatus">	
+	 			  			</div>
+ 			  		</div>	
+ 			  	</form>	
+ 		  	</div>	
+		  	
+		  	<div class="well">
+		  		<div class="row">
+			  			<table class="table table-bordered" ng-disabled = "bau.estatus">
+				  				<thead>
+					  					<tr>
+						  						<th class="text-center" width="12%">Tipo de Nota</th>
+						  						<th class="text-center" width="10%">Fecha</th>
+						  						<th class="text-center" width="40%">Nota</th>
+						  						<th class="text-center" width="20%">Lugar</th>
+						  						<th class="text-center" width="10%">Acción</th>
+					  					</tr>	
+ 									</thead>
+ 									<tbody>
+ 											<tr ng-repeat = "notas in bau.notasMarginales">
+	 												<td>{{notas.tipoNota}}</td>
+	 												<td style="text-align: center">{{notas.fecha | date:"dd-MM-yyyy"}}</td>
+	 												<td>{{notas.nota}}</td>
+	 												<td>{{notas.lugar}}</td>
+	 												<td style="text-align: right">
+														<a href="#" ng-click="bau.quitar(notas.numero)" class="btn btn-labeled btn-danger" ><i class="fa fa-trash"></i></a>
+														<a href="#" ng-click="bau.editar(notas)" class="btn btn-labeled btn-info"><i class="fa fa-pencil"></i></a>
+													</td>	
+	 							      </tr>
+ 									</tbody>
+			  			</table>
+		  		</div>
+		  	</div>	
+						
+		  	<div class="well">
+			  		<div class="row">
+							<div class="col-sm-4">
+								<input type="submit" ng-click="bau.guardar(bau.objeto,form)" value="Guardar" class="btn btn-success" ng-show="bau.action" valida-form formulario="form">
+								<input type="submit" ng-click="bau.actualizar(bau.objeto,form)" value="Actualizar" class="btn btn-success" ng-show="!bau.action" valida-form formulario="form">
+								<a href="./bautismosLista" class="btn btn-default btn-primary">
+									 Regresar
+								</a>
+							</div>
+						</div>
+		  	</div>	
+		  </form>
+	</div>
+</div>

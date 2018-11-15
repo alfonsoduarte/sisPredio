@@ -1,0 +1,117 @@
+<h2>Estipendios</h2>
+<!-- <div class="well"> -->
+	<div class="row">
+		<div class="col-sm-12">
+			<a class="btn btn-{{est.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+				href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="est.Nuevo()">
+			   {{est.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+			</a>
+			<br /><br />
+			<div class="collapse" id="collapseExample">
+				<form name="form" class="form-horizontal" role="form">
+			  	<div class="well">	    
+				  	<div class="row">
+			      	<div class="col-sm-4" valida>
+								<label>Sacramento o Servicio *</label>
+								<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="est.objeto.nombre" required capitalize>
+			      	</div>
+			      	
+			      	<div class="col-sm-4">
+								<label>Descripción</label>
+								<input name="descripcion" type="text" class="form-control" placeholder="Descripción" ng-model="est.objeto.descripcion" capitalize>
+			      	</div>
+			      	
+			      	<div class="col-sm-2" valida>
+								<label >Tipo *</label>
+								<select name="estatus" ng-model="est.objeto.tipo" data-placeholder="Seleccione" class="form-control" required >
+										<option value=""></option>
+										<option value="Celebración">Celebración</option>
+										<option value="Intención de Misa">Intención de Misa</option>
+										<option value="Trámite">Trámite</option>
+								</select>
+							</div>
+			      	
+			      	<div class="col-sm-2" valida>
+								<label>Arancel *</label>
+								<input name="arancel" type="number" min="0" class="form-control" ng-model="est.objeto.arancel" required>
+			      	</div>
+			      				      	
+				  	</div>
+				  	<br>
+				    <div class="row">
+							<div class="col-sm-12">
+								<input type="submit" ng-click="est.guardar(est.objeto,form)" value="Guardar" class="btn btn-primary" ng-show="est.action" valida-form formulario="form">
+								<input type="submit" ng-click="est.actualizar(est.objeto,form)" value="Actualizar" class="btn btn-primary" ng-show="!est.action" valida-form formulario="form">	
+							</div>
+						</div>
+			  	</div>  
+			  </form>
+			</div>
+		</div>
+	</div>
+<!-- </div> -->
+
+<!-- List -->
+
+<div class="well">
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th width="5%"><div class="text-center">No.</div></th>
+						<th width="25%"><div class="text-center">Nombre</div></th>
+						<th width="30%"><div class="text-center">Descripción</div></th>
+						<th width="10%"><div class="text-center">Tipo</div></th>
+						<th width="10%"><div class="text-center">Arancel</div></th>
+						<th width="10%">
+							<div class="text-center">
+								Estatus
+							</div>
+						</th>
+						<th width="5%">
+							<div class="text-center">
+								Acciones
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+			    <tr ng-repeat="objeto in est.arreglo">
+			    	<td>{{$index + 1}}</td>
+				    <td>{{objeto.nombre}}</td>
+				    <td>{{objeto.descripcion}}</td>
+				    <td>{{objeto.tipo}}</td>
+				    <td style="text-align: right">{{objeto.arancel | currency}}</td>
+				    <td>
+					    <div class="text-center">
+					    	<span ng-if="objeto.estatus" class="label label-success">
+								  Activo
+								</span>
+								<span ng-if="!objeto.estatus" class="label label-danger">
+								  Inactivo
+								</span>
+					    </div>
+				    </td>
+				    <td>
+					    <div class="text-center">
+						    <div class="btn-group">
+								  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    <span class="caret"></span>
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <ul class="dropdown-menu dropdown-menu-right text-left">
+								    <li><a href="#" ng-click="est.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+								    <li><a href="#" ng-click="est.cambiarEstatus(objeto._id)">
+									    <i class="fa fa-{{objeto.estatus ? 'trash' : 'check' }}"></i> {{objeto.estatus ? "Desactivar" : "Activar" }}</a>
+								    </li>
+								  </ul>
+								</div>
+					    </div>				    
+				    </td>
+			    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

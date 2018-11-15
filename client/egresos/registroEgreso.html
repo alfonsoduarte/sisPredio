@@ -1,0 +1,109 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+				Registro de Egresos
+		</h1>
+	</div>
+</div>
+
+<!-- <div class="well"> -->
+	<div class="row">
+		<div class="col-sm-12">
+			<form name="form" class="form-horizontal" role="form">
+		  	<div class="well">	    
+			  	<div class="row">
+				  	
+				  	<div class="col-sm-3" valida>					    
+							<label>Fecha *</label>
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="regre.objeto.fecha" required="">
+						</div>
+				  	
+		      	<div class="col-sm-3" valida>
+							<label>Tipo de Egreso *</label>
+							<select name="tipoEgreso" class="form-control select2" placeholder="Seleccione" ng-model="regre.objeto.tipoEgreso_id" required>
+								<option ng-repeat="obj in regre.egresos" value="{{obj._id}}">{{obj.nombre}}</option>
+							</select>
+						</div>
+		      	
+		      	<div class="col-sm-4" ng-if = "regre.egresosDetalle.length > 0"  valida >
+							<label>Concepto *</label>
+							<select name="tipoEgresoDetalle" class="form-control select2" placeholder="Seleccione" ng-model="regre.objeto.tipoEgresoDetalle_id" required>
+								<option ng-repeat="obj in regre.egresosDetalle" value="{{obj._id}}">{{obj.nombre}}</option>
+							</select>
+						</div>
+						
+						<div class="col-sm-2" valida> 					    
+							<label>Cantidad *</label>
+							<input name="cantidad" type="number" min="0" class="form-control" ng-model="regre.objeto.cantidad" required>
+						</div>
+		      	
+			  	</div>
+			  	<br>
+			    <div class="row">
+						<div class="col-sm-12">
+							<input type="submit" ng-click="regre.agregar(regre.objeto,form)" value="Agregar" class="btn btn-primary" valida-form formulario="form">	
+						</div>
+					</div>
+		  	</div>  
+		  </form>
+
+		</div>
+	</div>
+<!-- </div> -->
+
+<!-- List -->
+
+<div class="well">
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th width="5%"><div class="text-center">No.</div></th>
+						<th width="10%"><div class="text-center">Fecha</div></th>
+						<th width="10%"><div class="text-center">Tipo</div></th>
+						<th width="10%"><div class="text-center">Detalle</div></th>
+						<th width="10%"><div class="text-center">Importe</div></th>				
+						<th width="5%">
+							<div class="text-center">
+								Acciones
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+			    <tr ng-repeat="objeto in regre.arreglo">
+			    	<td>{{$index + 1}}</td>
+				    <td>{{objeto.fecha | date: "dd-MM-yyyy"}}</td>
+				    <td>{{objeto.tipoEgreso}}</td>
+				    <td>{{objeto.tipoEgresoDetalle}}</td>
+				    <td style="text-align: right">{{objeto.cantidad | currency}}</td>
+				    <td>
+					    <div class="text-center">
+						    <div class="btn-group">
+								  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    <span class="caret"></span>
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <ul class="dropdown-menu text-left">
+								    <li><a href="#" ng-click="regre.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+								    <li><a href="#" ng-click="regre.cambiarEstatus(objeto._id)">
+									    <i class="fa fa-{{objeto.estatus ? 'trash' : 'check' }}"></i> {{objeto.estatus ? "Desactivar" : "Activar" }}</a>
+								    </li>
+								  </ul>
+								</div>
+					    </div>				    
+				    </td>
+			    </tr>
+				</tbody>
+				
+				<tfoot>
+					<tr>
+						<td colspan="6"><input type="submit" ng-click="regre.guardar(regre.arreglo)" value="Guardar" class="btn btn-success"></td>
+					</tr>
+				</tfoot>	
+				
+			</table>
+		</div>
+	</div>
+</div>

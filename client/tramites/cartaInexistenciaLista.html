@@ -1,0 +1,296 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+			<i class="fa fa-search fa-fw "></i>
+				Primeras Comuniones &gt; Buscar
+		</h1>
+	</div>
+</div>
+
+<div class="well">	
+	<div class="row">
+		<div class="col-sm-2">
+				<a href="./primerasComuniones" class="btn btn-default btn-primary">
+						<i class="fa fa-plus"></i> Nuevo
+				</a>
+		</div>	
+<!--
+		<div class="col-sm-1">
+				<a href="#" ng-click="pcoml.verListado()" class="btn btn-default btn-primary">
+						<i class="fa fa-file-text-o"></i> Listado
+				</a>
+		</div>
+-->
+		<div class="col-sm-9 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="pcoml.busqueda" btn-radio="'nombre'">Nombre</label>
+ 						<label class="btn btn-default" ng-model="pcoml.busqueda" btn-radio="'fechas'">Fecha</label>
+ 			  </div>
+			</div>	
+ 		</div>
+ 	</div> 
+  <div class="row">
+		<div class="col-sm-6" ng-if = "pcoml.busqueda == 'nombre'">
+				<label>Apellido Paterno, ApellidoMaterno y Nombre (s)  </label>
+				<input class="form-control" type="text" placeholder="Buscar..." ng-model="pcoml.buscar.nombre" capitalize> 
+		</div>
+ 		<div ng-if = "pcoml.busqueda == 'fechas'">
+				<div class="col-sm-3">	
+					<label>Fecha Inicial </label>				    
+					<input name="fechaInicial" type="date" format="dd/MM/yyyy" class="form-control" ng-model="pcoml.fechaInicial">
+				</div>
+				<div class="col-sm-3">					    
+					<label>Fecha Final </label>
+					<input name="fechaFinal" type="date" format="dd/MM/yyyy" class="form-control" ng-model="pcoml.fechaFinal">
+				</div>
+				<div class="col-sm-1">
+						<br>
+						<a href="#" ng-click = "pcoml.buscarPrimerasComunionesFecha()" class="btn btn-default btn-primary">
+								<i class="fa fa-search"></i> Buscar
+						</a>
+				</div>
+ 		</div>
+ 	</div> 
+ </div>
+
+<div class="well">	
+ 	<div class="row">
+ 		<table class="table table-bordered table-hover">
+  		<thead>
+				<tr>	  		
+ 	    		<th style="text-align: center">No.</th>
+	    		<th style="text-align: center">Nombre</th>
+	    		<th style="text-align: center">Fecha</th>
+	    		<th style="text-align: center">Libro</th>
+	    		<th style="text-align: center">Foja</th>
+	    		<th style="text-align: center">N. Acta</th>
+ 	    		<th style="text-align: center">Estatus</th>
+	    		<th style="text-align: center">Acción</th>
+	    	</tr>	
+  		</thead>
+  		<tbody>
+    		<tr ng-repeat ="objeto in pcoml.arreglo">
+ 	    		<td style="width: 5%">{{$index + 1}}</td>
+ 	    		<td>{{objeto.nombreCompleto}}</td>
+ 	    		<td>{{objeto.fecha | date: 'dd/MM/yyyy'}}</td>
+ 	    		<td>{{objeto.libro}}</td>
+ 	    		<td>{{objeto.foja}}</td>
+ 	    		<td>{{objeto.noDeActa}}</td>
+	    		<td style="width: 10%">
+		    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+							  En Trámite
+							</span>
+							<span ng-if="objeto.estatus == 'primeraComunion'" class="label label-success">
+							  P. Comunión
+							</span>
+	    		</td>
+		    	<td style="width: 15%">
+				    	<a href="#" ng-click="pcoml.verDatos(objeto)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i></a>
+              <a href="/primerasComuniones/{{objeto._id}}" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-pencil ]"></i></a>
+              <a href="#" ng-click="pcoml.seleccionaFirma(objeto,1)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'primeraComunion'"><i class="[ glyphicon glyphicon-book ]"></i></a>
+<!-- 	            <a href="#" ng-click="pcoml.seleccionaFirma(objeto,2)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'enTramite'"><i class="[ glyphicon glyphicon-file ]"></i></a>     -->
+		    	</td>	
+    		</tr>
+  		</tbody>	
+		</table>		
+ 
+ 
+ 	</div>
+</div>	
+		
+<div id="modalVerDatos" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Primera Comunión: {{pcoml.objeto.nombreCompleto}}</h4>
+		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<tbody>
+										    		<tr>
+											    		<td style="width: 20%">Fecha P. Comunión:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.fechaPrimeraComunionLetra}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Fecha Bautismo:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.fechaBautismoLetra}}</strong></td>
+										    		</tr>
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia Bautismo:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.parroquiaBautismo}}</strong></td>
+										    		</tr>
+ 										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.parroquiaNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Sacerdote Celebró:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.sacerdoteNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="pcoml.objeto.estatus == 'primeraComunion'">
+											    		<td style="width: 20%">Libro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.libro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="pcoml.objeto.estatus == 'primeraComunion'">
+											    		<td style="width: 20%">Foja:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.foja}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="pcoml.objeto.estatus == 'primeraComunion'">
+											    		<td style="width: 20%">No. de Acta:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.noDeActa}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.padre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Madre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.madre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padrino:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.padrino}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Madrina:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{pcoml.objeto.madrina}}</strong></td>
+										    		</tr>	
+  										    		
+									    		</tbody>	
+								    		</table>	
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalVerListado" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Listado</h4>
+		        </div> 
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Fecha:</h4>
+		        </div> 
+		        <div class="col-sm-3">					    
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="pcoml.fecha">
+						</div>
+						<div class="col-sm-1">
+								<a href="#" ng-click = "pcoml.buscarConfirmaciones()" class="btn btn-default btn-primary">
+										<i class="fa fa-search"></i> Buscar
+								</a>
+						</div>	
+ 		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<thead>
+											    	<th width="10%" style="margin: 0px; border: 0px; padding: 0px">
+															<input id="todos" type="checkbox" class="form-control" 
+																								ng-checked="false" 
+																								ng-click="pcoml.seleccionarTodos()" style="margin: 0px; border: 0px; padding: 0px" />
+														</th>
+										    		<th>No.</th>
+										    		<th>Hora</th>
+										    		<th>Confirmado</th>
+										    		<th>Estatus</th>
+										    		<th>Acción</th>
+									    		</thead>
+									    		<tbody>
+										    		<tr ng-repeat ="objeto in pcoml.arregloListado">
+											    		<td style="margin: 0px; border: 0px; padding: 0px">
+												    		<input type="checkbox" class="form-control" 
+				    											 ng-model="objeto.imprimir"  style="margin: 0px; border: 0px; padding: 0px"/>
+											    		</td>
+											    		<td style="width: 10%">{{$index + 1}}</td>
+											    		<td style="width: 10%">{{objeto.hora | date:"h:mm a"}}</td>
+											    		<td>{{objeto.nombreCompleto}}</td>
+											    		<td>
+												    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+																	  En Trámite
+																	</span>
+																	<span ng-if="objeto.estatus == 'bautizado'" class="label label-success">
+																	  Bautizado
+																	</span>
+											    		</td>
+												    	<td style="width: 10%">
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="baul.seleccionaFirma(objeto,1)" ng-if="objeto.estatus == 'bautizado'"><i class="fa fa-gear fa-print"></i></a> 
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="baul.seleccionaFirma(objeto,2)" ng-if="objeto.estatus == 'enTramite'"><i class="fa fa-gear fa-print"></i></a>
+													    	
+												    	</td>	
+										    		</tr>
+									    		</tbody>	
+								    		</table>	
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" ng-click = "pcoml.seleccionaFirma({listado:'listado'},3)" class="btn btn-success">Aceptar</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+ 
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="pcoml.sacerdote_id" required>
+								<option ng-repeat="sac in pcoml.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="pcoml.imprimir(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div> 		
+		

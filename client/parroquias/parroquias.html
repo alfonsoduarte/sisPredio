@@ -1,0 +1,234 @@
+<h2>Parroquias</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{par.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="par.Nuevo()">
+		   {{par.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form name="form" class="form-horizontal" role="form">
+		  	<div class="well">	    
+			  	<div class="row">
+			  			<div class="col-sm-6" valida>
+								<label >Diócesis *</label>
+								<select name="diocesis_id" class="form-control select2" placeholder="Seleccione" ng-model="par.objeto.diocesis_id" required>
+									<option ng-repeat="dio in par.diocesis" value="{{dio._id}}">{{dio.nombre}}</option>
+								</select>
+							</div>
+			  	</div>
+			    <div class="row">
+							<div class="col-sm-4" valida>
+								<label for="zonaPastoral_id">Zona Pastoral *</label>
+								<select name="zonaPastoral" class="form-control select2" placeholder="Seleccione" ng-model="par.objeto.zonaPastoral_id" required>
+									<option ng-repeat="zp in par.zonasPastorales" value="{{zp._id}}">{{zp.nombre}}</option>
+								</select>
+							</div>
+							<div class="col-sm-4" valida>
+								<label for="decanato_id">Decanato *</label>
+								<select name="decanato" class="form-control select2" placeholder="Seleccione" ng-model="par.objeto.decanato_id" required>
+									<option ng-repeat="dec in par.decanatos" value="{{dec._id}}">{{dec.nombre}}</option>
+								</select>
+							</div>	
+							
+							<div class="col-sm-4" valida>
+							<label >Tipo *</label>
+							<select name="tipo" ng-model="par.objeto.tipo"class="form-control" required>
+									<option value=""></option>
+									<option value="PARROQUIA">PARROQUIA</option>
+									<option value="CUIASIPARROQUIA">CUIASIPARROQUIA</option>
+ 							</select>
+						</div>
+              
+					</div>
+					<div class="row">
+							<div class="col-sm-6" valida>
+						    <label>Nombre *</label>
+					    	<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="par.objeto.nombre" required>
+					    </div>
+					    <div class="col-sm-6" valida>
+						    <label>Domicilio *</label>
+					    	<input name="domicilio" type="text" class="form-control" placeholder="Domicilio" ng-model="par.objeto.domicilio" required>
+					    </div>
+					</div>	
+					<div class="row">
+							<div class="col-sm-3" valida>
+						    <label>Telefonos *</label>
+					    	<input name="telefono" type="text" class="form-control" placeholder="Teléfonos" ng-model="par.objeto.telefonos" required>
+					    </div>
+					    
+					    <div class="col-sm-3" >
+						    <label>Correo </label>
+					    	<input name="correo" type="text" class="form-control" placeholder="Correo" ng-model="par.objeto.correo">
+					    </div>
+					    
+					    <div class="col-sm-3" valida>
+						    <label>Lugar Parroquia *</label>
+					    	<input name="lugar" type="text" class="form-control" placeholder="Lugar" ng-model="par.objeto.lugar" required>
+					    </div>
+					    
+					</div>
+					<div class="row">
+							<div class="col-sm-3" valida>
+						    <label>Folio Bautismo *</label>
+					    	<input name="folioBautismo" type="number"  class="form-control"  ng-model="par.objeto.folioBautismo" required >
+					    </div>
+					    
+					    <div class="col-sm-3" valida>
+						    <label>Folio Confirmación *</label>
+					    	<input name="folioConfirmacion" type="number" class="form-control" ng-model="par.objeto.folioConfirmacion" required>
+					    </div>
+					    
+					    <div class="col-sm-3" valida>
+						    <label>Folio Primera Comunión *</label>
+					    	<input name="folioPrimeraComunion" type="number" class="form-control"  ng-model="par.objeto.folioPrimeraComunion" required >
+					    </div>
+					    
+					    <div class="col-sm-3" valida>
+						    <label>Folio Matrimonios *</label>
+					    	<input name="folioMatrimonios" type="number" class="form-control"  ng-model="par.objeto.folioMatrimonios" required >
+					    </div>
+					</div>
+					
+					<div class="row">
+							<div class="col-sm-3">
+								<label class="checkbox-inline">
+									  <input type="checkbox" class="checkbox style-0" ng-model = "par.objeto.apoyo">
+									  <span>Configura Apoyo</span>
+								</label>
+							</div>
+							<div class="col-sm-3">
+								<label class="checkbox-inline">
+									  <input type="checkbox" class="checkbox style-0" ng-model = "par.objeto.notificaciones">
+									  <span>Recibir Notificaciones</span>
+								</label>
+							</div>
+							
+							<div class="col-sm-3">
+								<label class="checkbox-inline">
+									  <input type="checkbox" class="checkbox style-0" ng-model = "par.objeto.busquedas">
+									  <span>Permitir Búsquedas</span>
+								</label>
+							</div>
+							
+					</div>
+					<br>
+<!--
+					<div class="row">
+							<h3> Templos</h3>
+							<div class="col-sm-3">
+								<label>Nombre Templo *</label>
+					    	<input name="templo" type="text" class="form-control" placeholder="Lugar" ng-model="par.nombreTemplo" required capitalize>
+							</div>
+							
+					</div>
+					<div class="row">
+							<div class="col-sm-12">
+									<table>
+											<thead>
+													<tr>
+														<th>No.</th>
+														<th>Nombre</th>
+														<th>Estatus</th>
+														<th>Acciones</th>
+													</tr>		  
+											</thead>
+													<tr>
+														<td>No.</td>
+														<td>Nombre</td>
+														<td>Estatus</td>
+														<td>Acciones</td>
+													</tr>
+											<tbody>
+													
+											</tbody>	
+										
+									</table>	
+							</div>
+					
+					</div>
+					<br>
+-->
+			    <div class="row">
+							<div class="col-sm-4">
+								<input type="submit" ng-click="par.guardar(par.objeto,form)" value="Guardar" class="btn btn-primary" ng-show="par.action" valida-form formulario="form">
+								<input type="submit" ng-click="par.actualizar(par.objeto,form)" value="Actualizar" class="btn btn-primary" ng-show="!par.action" valida-form formulario="form">	
+							</div>
+					</div>
+		  	</div>  
+		  </form>
+		</div>
+	</div>
+</div>
+<br>
+<!-- List -->
+
+<div class="well">
+
+	<div class="row">
+		<div class="col-sm-12">
+			
+			<div class="row">
+				<div class="col-sm-6">
+						<label>Nombre  </label>
+						<input class="form-control" type="text" placeholder="Buscar..." ng-model="par.buscar.nombre" capitalize> 
+				</div>
+	   	</div> 
+	
+		 	<br>
+			
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th width="5%"><div class="text-center">No.</div></th>
+						<th width="40%"><div class="text-center">Nombre</div></th>
+						<th width="40%"><div class="text-center">Decanáto</div></th>
+						<th width="25%">
+							<div class="text-center">
+								Estatus
+							</div>
+						</th>
+						<th width="25%">
+							<div class="text-center">
+								Acciones
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+			    <tr ng-repeat="objeto in par.parroquias">
+			     <td>{{$index + 1}}</td>
+				    <td>{{objeto.nombre}}</td>
+				    <td>{{objeto.decanato}}</td>
+				    <td>
+					    <div class="text-center">
+					    	<span ng-if="objeto.estatus" class="label label-success">
+								  Activo
+								</span>
+								<span ng-if="!objeto.estatus" class="label label-danger">
+								  Inactivo
+								</span>
+					    </div>
+				    </td>
+				    <td>
+					    <div class="text-center">
+						    <div class="btn-group">
+								  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    <span class="caret"></span>
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <ul class="dropdown-menu dropdown-menu-right text-left">
+								    <li><a href="#" ng-click="par.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+								    <li><a href="#" ng-click="par.cambiarEstatus(objeto._id)">
+									    <i class="fa fa-{{objeto.estatus ? 'trash' : 'check' }}"></i> {{objeto.estatus ? "Desactivar" : "Activar" }}</a>
+								    </li>
+								  </ul>
+								</div>
+					    </div>				    
+				    </td>
+			    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

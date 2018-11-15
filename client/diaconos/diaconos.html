@@ -1,0 +1,178 @@
+<h2>Diáconos</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{dia.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="dia.Nuevo()">
+		   {{dia.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form name="form" class="form-horizontal" role="form">
+				<h3>Datos Generales</h3>
+		  	<div class="well">	    
+					<div class="row">
+							<div class="col-sm-4" valida>
+						    <label>Nombre *</label>
+					    	<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.nombre" required capitalize>
+					    </div>
+					    <div class="col-sm-4" valida>
+						    <label>Apellido Paterno *</label>
+					    	<input name="apellidoPaterno" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.apellidoPaterno" required capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>ApellidoMaterno</label>
+					    	<input name="apellidoMaterno" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.apellidoMaterno" capitalize>
+					    </div>
+					</div>	
+					
+					<div class="row">
+							<div class="col-sm-2" valida>
+								<label >Título *</label>
+								<select name="estatus" ng-model="dia.objeto.profile.titulo" data-placeholder="Seleccione" class="form-control" required >
+										<option value="SR. DIÁC.">SR. DIÁC.</option>
+ 								</select>
+							</div>
+					    <div class="col-sm-3">
+						    <label>Celular</label>
+					    	<input name="celular" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.celular">
+					    </div>
+					    <div class="col-sm-3">
+						    <label>Teléfono Casa</label>
+					    	<input name="telefonoCasa" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.telefonoCasa">
+					    </div>
+					    <div class="col-sm-3">
+						    <label>Correo</label>
+					    	<input name="correo" type="text" class="form-control" placeholder="Nombre" ng-model="dia.objeto.profile.correo">
+					    </div>
+					</div>
+					
+		  	</div>
+
+		  	<h3>Datos de la Cuenta</h3>
+		  	<div class="well">
+			  	<div class="row">
+				  		<div class="col-sm-3" valida>
+								<label >Cargo *</label>
+								<select name="cargo" ng-model="dia.objeto.profile.cargo" data-placeholder="Seleccione" class="form-control" required >
+										<option value=""></option>
+										<option value="DIÁCONO">DIÁCONO</option>
+  								</select>
+							</div>
+							<div class="col-sm-4" valida>
+								<label >Diócesis *</label>
+								<select name="diocesis_id" class="form-control select2" placeholder="Seleccione" ng-model="dia.objeto.profile.diocesis_id" required>
+									<option ng-repeat="dio in dia.diocesis" value="{{dio._id}}">{{dio.nombre}}</option>
+								</select>
+							</div>
+							<div class="col-sm-3">
+								<label for="parroquia_id">Parroquias *</label>
+								<select ng-options="parroquia._id as parroquia.nombre for parroquia in dia.parroquias" 
+     								ng-model="dia.objeto.profile.parroquia_id" 
+       							class="js-example-basic-single js-states form-control" 
+         						placeholder="Seleccione" 
+             				style="width: 500px; ">
+						 		</select>
+							</div>	
+					</div>
+					<div class="row">
+						<div class="col-sm-3" valida> 					    
+							<label>Usuario *</label>
+							<input name="usuario" type="text" class="form-control" placeholder="Usuario" ng-model="dia.objeto.username" required="">
+						</div>
+						<div class="col-sm-3" valida>					    
+							<label>Contraseña *</label>
+							<input name="contrasena" type="password" class="form-control" placeholder="Contraseña" ng-model="dia.objeto.password" required="" ng-disabled="dia.cambiarContrasena">
+						</div>		    				    	    
+						<div class="col-sm-3" valida>					    
+							<label>Confirmar Contraseña *</label>
+							<input name="confirmar" type="password" class="form-control" placeholder="Confirmar Contraseña" ng-model="dia.objeto.confirmPassword" required="" ng-disabled="dia.cambiarContrasena">
+						</div>
+						<div class="col-sm-3" ng-show="!dia.action">			
+							<br>		    
+							<button type="button" class="btn btn-primary" ng-click="dia.cambiarPassword()">Cambiar Contraseña</button>
+						</div>
+					</div>
+					<br />
+			    <div class="row">
+							<div class="col-sm-4">
+								<input type="submit" ng-click="dia.guardar(dia.objeto,form)" value="Guardar" class="btn btn-success" ng-show="dia.action" valida-form formulario="form">
+								<input type="submit" ng-click="dia.actualizar(dia.objeto,form)" value="Actualizar" class="btn btn-success" ng-show="!dia.action" valida-form formulario="form">	
+							</div>
+					</div>
+		  	</div>  
+		  </form>
+		</div>
+	</div>
+</div>
+<br>
+<!-- List -->
+<div class="well">
+	
+<div class="row">
+	<div class="col-sm-12">
+		
+		<div class="row">
+			<div class="col-sm-6">
+					<label>Nombre  </label>
+					<input class="form-control" type="text" placeholder="Buscar..." ng-model="dia.buscar.nombre" capitalize> 
+			</div>
+   	</div> 
+
+	 	<br>
+		
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+				<th width="3%"><div class="text-center">No.</div></th>
+					<th width="25%"><div class="text-center">Nombre</div></th>
+					<th width="25%"><div class="text-center">Parroquia</div></th>
+					<th width="10%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="7%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="objeto in dia.diaconos">
+		     <td>{{$index + 1}}</td>
+			    <td>{{objeto.profile.nombreCompleto}}</td>
+					<td>{{objeto.profile.parroquia}}</td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="objeto.profile.estatus" class="label label-success">
+							  Activo
+							</span>
+							<span ng-if="!objeto.profile.estatus" class="label label-danger">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu dropdown-menu-right text-left">
+							    <li><a href="#" ng-click="dia.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							    <li><a href="#" ng-click="dia.cambiarEstatus(objeto._id)">
+								    <i class="fa fa-{{objeto.profile.estatus ? 'trash' : 'check' }}"></i> {{objeto.profile.estatus ? "Desactivar" : "Activar" }}</a>
+							    </li>
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+</div>

@@ -1,0 +1,66 @@
+<!-- Tabla de Visitados Analistas -->
+<div class="well">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="form-group">
+				<label for="fecha">Fecha Inicial:</label>
+				<input type="date" name="fechaInicial" format="dd-MM-yyyy" class="form-control" ng-model="not.fechaInicial" />
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="form-group">
+				<label for="fecha">Fecha Final:</label>
+				<input type="date" name="fechaFinal" format="dd-MM-yyyy" class="form-control" ng-model="not.fechaFinal" />
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<br>
+			<input type="button" class="btn btn-primary" ng-click="not.buscar()" value="Buscar" />
+		</div>	
+		
+		
+		
+	</div>		
+</div>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" width="5%">No.</th>
+			<th class="text-center" width="20%">Nombre</th>
+			<th class="text-center" width="15%">Tipo</th>
+			<th class="text-center" width="15%">Parroquia</th>
+			<th class="text-center" width="15%">Lugar</th>
+			<th class="text-center" width="5%">Fecha</th>
+			<th class="text-center" width="5%">Folio</th>
+			<th class="text-center" width="5%">Foja</th>
+			<th class="text-center" width="5%">Acta</th>
+			<th class="text-center" width="5%">Tipo</th>
+			<th class="text-center" width="5%">Estatus</th>
+		</tr>
+	</thead>
+	<tbody>
+    <tr ng-repeat="objeto in not.historial">
+	    <td class="text-center">{{$index + 1}}</td>
+	    <td>{{objeto.nombreCompleto}}</td>
+	    <td>{{objeto.tipoNota}}</td>
+	    <td>{{objeto.parroquiaDestino}}</td>
+	    <td>{{objeto.lugarDestino}}</td>
+	    <td>{{objeto.fechaSacramento | date : "dd/MM/yyyy"}}</td>
+	    <td>{{objeto.libro}}</td>
+	    <td>{{objeto.foja}}</td>
+	    <td>{{objeto.noDeActa}}</td>
+	    <td>{{objeto.tipo}}</td>
+	    <td>
+			    <div class="text-center">
+			    	<span ng-if="objeto.estatus == 1" class="label label-warning">
+						  Pendiente
+						</span>
+						<span ng-if="objeto.estatus == 2" class="label label-success">
+						  Aplicada
+						</span>
+				  </div>
+			</td>
+    </tr>
+	</tbody>
+</table>
+		

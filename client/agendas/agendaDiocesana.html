@@ -1,0 +1,97 @@
+<h2>Agenda Diocesana</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{aged.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="aged.Nuevo()">
+		   {{aged.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form name="form" class="form-horizontal" role="form">
+		  	<div class="well">	    
+			    <div class="row"> 
+				    <div class="col-sm-6" valida>
+								<label >Diócesis *</label>
+								<select name="diocesis_id" class="form-control select2" placeholder="Seleccione" ng-model="aged.objeto.diocesis_id" required>
+									<option ng-repeat="dio in aged.diocesis" value="{{dio._id}}">{{dio.nombre}}</option>
+								</select>
+						</div>
+				    <div class="col-sm-3" valida>
+								<label>Fecha </label>
+								<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="aged.objeto.fecha" required>
+						</div>
+			    </div>
+				  <div class="row">  
+            <div class="col-sm-8" valida>
+					    <label>Nombre *</label>
+				    	<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="aged.objeto.nombre" required>
+				    </div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<input type="submit" ng-click="aged.guardar(aged.objeto,form)" value="Guardar" class="btn btn-primary" ng-show="aged.action" valida-form formulario="form">
+							<input type="submit" ng-click="aged.actualizar(aged.objeto,form)" value="Actualizar" class="btn btn-primary" ng-show="!aged.action" valida-form formulario="form">	
+						</div>
+					</div>
+		  	</div>
+		  </form>
+		</div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="5%"><div class="text-center">No.</div></th>
+					<th width="10%"><div class="text-center">Fecha</div></th>
+					<th width="40%"><div class="text-center">Nombre</div></th>
+					<th width="25%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="25%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="objeto in aged.arreglo">
+			    <td>{{$index + 1}}</td>
+					<td style="text-align: center">{{objeto.fecha | date:"dd/MM/yyyy"}}</td>
+			    <td>{{objeto.nombre}}</td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="objeto.estatus" class="label label-success">
+							  Activo
+							</span>
+							<span ng-if="!objeto.estatus" class="label label-danger">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="aged.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							    <li><a href="#" ng-click="aged.cambiarEstatus(objeto._id)">
+								    <i class="fa fa-{{objeto.estatus ? 'trash' : 'check' }}"></i> {{objeto.estatus ? "Desactivar" : "Activar" }}</a>
+							    </li>
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>

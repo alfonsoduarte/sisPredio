@@ -1,0 +1,441 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+			<i class="fa fa-search fa-fw "></i>
+				Bautismos &gt; Buscar
+		</h1>
+	</div>
+</div>
+<div class="well">	
+	<div class="row">
+		<div class="col-sm-1">
+				<a href="./bautismos" class="btn btn-default btn-primary">
+						<i class="fa fa-plus"></i> Nuevo
+				</a>
+		</div>	
+		<div class="col-sm-1">
+				<a href="#" ng-click="baul.verListado()" class="btn btn-default btn-primary">
+						<i class="fa fa-file-text-o"></i> Listado
+				</a>
+		</div>
+
+ 		<div class="col-sm-4 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="baul.busquedaParroquia" ng-click="baul.inicializaBusqueda()" btn-radio="'local'">Local</label>
+ 						<label class="btn btn-default" ng-model="baul.busquedaParroquia" ng-click="baul.inicializaBusqueda()" btn-radio="'foranea'">Foranea</label>
+ 			  </div>
+			</div>	
+ 		</div>
+ 		
+ 		<div class="col-sm-4 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="baul.busqueda" ng-click="baul.inicializaBusqueda()"  btn-radio="'nombre'">Nombre</label>
+ 						<label class="btn btn-default" ng-model="baul.busqueda" ng-click="baul.inicializaBusqueda()" btn-radio="'fechas'">Fecha</label>
+ 			  </div>
+			</div>	
+ 		</div>
+ 		 		
+ 	</div> 
+  <div class="row">
+		<div class="col-sm-6" ng-if = "baul.busqueda == 'nombre'">
+				<label>Apellido Paterno, ApellidoMaterno y Nombre (s)  </label>
+				<input class="form-control" type="text" placeholder="Buscar..." ng-model="baul.buscar.nombre" capitalize> 
+		</div>
+  	<div ng-if = "baul.busqueda == 'fechas'">
+				<div class="col-sm-3">	
+					<label>Fecha Inicial </label>				    
+					<input name="fechaInicial" type="date" format="dd/MM/yyyy" class="form-control" ng-model="baul.fechaInicial">
+				</div>
+				<div class="col-sm-3">					    
+					<label>Fecha Final </label>
+					<input name="fechaFinal" type="date" format="dd/MM/yyyy" class="form-control" ng-model="baul.fechaFinal">
+				</div>
+				<div class="col-sm-1">
+						<br>
+						<a href="#" ng-click = "baul.buscarBautismosFecha()" class="btn btn-default btn-primary">
+								<i class="fa fa-search"></i> Buscar
+						</a>
+				</div>
+ 		</div>
+	
+		<div ng-show = "baul.busquedaParroquia == 'foranea'">
+				
+				<div class="col-sm-4 pull-right">
+					<label >Parroquia Foranea </label>
+					<select ng-options="p._id as p.nombre for p in baul.parroquiasBuscar" 
+   								ng-model="baul.parroquiaForanea_id" 
+     							class="js-example-basic-single js-states form-control" 
+       						placeholder="Seleccione" 
+           				style="width: 300px; height: 80px; ">
+					</select>
+				</div>
+		</div>
+ 		
+ 		
+ 	</div> 
+ 	 	
+</div>
+
+<div class="well">
+	<div class="row">
+		
+		<div class="row">
+		 	<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="baul.izq()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</span>Izq 
+				</a>
+			</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="baul.der()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</span>Der
+				</a>
+			</div>
+			
+	 	</div>
+		
+<!--
+ 		<div class="[ col-sm-3 ]" ng-repeat="objeto in baul.arreglo">
+        <div class="[ panel panel-default ] panel-google-plus">
+              <div class="panel-heading">
+	            	<p style="font-size: small">
+		            	<strong> {{objeto.nombre}} </strong>
+	            	</p>	
+	            	<p style="font-size: smaller">
+		              <strong> {{objeto.apellidoPaterno}} {{objeto.apellidoMaterno}}</strong>
+	            	</p>	
+	            	
+             </div>
+            <div class="panel-body">
+                <h6><span>Fecha: </span><span>{{objeto.fecha | date: "dd/MM/yyyy"}} </span> </h6>
+                <h6><span>Hora: </span><span>{{objeto.hora | date:"h:mm a"}} </span> 
+                <span ng-if="objeto.estatus == 'enTramite'" class="label label-warning pull-right">
+								  En Trámite
+								</span>
+								<span ng-if="objeto.estatus == 'bautizado'" class="label label-success pull-right">
+								  Bautizado
+								</span>
+                </h6>
+            </div>
+            <div class="panel-footer">
+                <a href="#" ng-click="baul.verDatos(objeto)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i></a>
+                <a href="/bautismos/{{objeto._id}}" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-pencil ]"></i></a>
+	              <a href="#" ng-click="baul.seleccionaFirma(objeto,1)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'bautizado'"><i class="[ glyphicon glyphicon-book ]"></i></a>
+		            <a href="#" ng-click="baul.seleccionaFirma(objeto,2)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'enTramite'"><i class="[ glyphicon glyphicon-file ]"></i></a>    
+            </div>
+        </div>
+    </div>
+-->
+		<table class="table table-bordered table-hover">
+  		<thead>
+				<tr>	  		
+ 	    		<th style="text-align: center">No.</th>
+	    		<th style="text-align: center">Nombre</th>
+	    		<th style="text-align: center">Fecha</th>
+	    		<th style="text-align: center">Libro</th>
+	    		<th style="text-align: center">Foja</th>
+	    		<th style="text-align: center">N. Acta</th>
+ 	    		<th style="text-align: center">Estatus</th>
+	    		<th style="text-align: center">Acción</th>
+	    	</tr>	
+  		</thead>
+  		<tbody>
+    		<tr ng-repeat ="objeto in baul.arreglo">
+ 	    		<td style="width: 5%">{{$index + baul.numeroPagina + 1}}</td>
+ 	    		<td>{{objeto.nombreCompleto}}</td>
+ 	    		<td>{{objeto.fecha | date: 'dd/MM/yyyy'}}</td>
+ 	    		<td>{{objeto.libro}}</td>
+ 	    		<td>{{objeto.foja}}</td>
+ 	    		<td>{{objeto.noDeActa}}</td>
+	    		<td style="width: 10%">
+		    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+							  En Trámite
+							</span>
+							<span ng-if="objeto.estatus == 'bautizado'" class="label label-success">
+							  Bautizado
+							</span>
+	    		</td>
+		    	<td>
+				    	<a href ="#" ng-click="baul.verDatos(objeto._id)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i></a>
+              <a href ="/bautismos/{{objeto._id}}" class="[ btn btn-default ]" 
+	               ng-if = "baul.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-pencil ]"></i>
+	            </a>
+              <a href="#" ng-click="baul.seleccionaFirma(objeto._id,1)" class="[ btn btn-default ]" 
+	               ng-if="objeto.estatus == 'bautizado' && baul.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-book ]"></i>	
+	            </a>
+	            <a href="#" ng-click="baul.seleccionaFirma(objeto._id,2)" class="[ btn btn-default ]" 
+		             ng-if="objeto.estatus == 'enTramite' && baul.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-file ]"></i>
+		          </a>
+		          
+		          <a href="#" ng-click="baul.eliminar(objeto)" class="[ btn btn-default ]" 
+		             ng-if="currentUser.roles[0] == 'Administrador' && baul.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-remove ]"></i>
+		          </a>    
+		    	</td>	
+    		</tr>
+  		</tbody>
+  		
+		</table>	
+		
+		<div class="row">
+		 	<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="baul.izq()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</span>Izq 
+				</a>
+			</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="baul.der()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</span>Der
+				</a>
+			</div>
+		</div>	
+
+
+	</div>
+</div>
+
+
+<div id="modalVerDatos" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Bautizado: {{baul.objeto.nombreCompleto}}</h4>
+		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<tbody>
+										    		<tr>
+											    		<td style="width: 20%">Fecha Bautizo:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.fechaBautizo}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.parroquiaNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Sacerdote Bautizó:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.sacerdoteNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="baul.objeto.estatus == 'bautizado'">
+											    		<td style="width: 20%">Libro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.libro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="baul.objeto.estatus == 'bautizado'">
+											    		<td style="width: 20%">Foja:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.foja}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="baul.objeto.estatus == 'bautizado'">
+											    		<td style="width: 20%">No. de Acta:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.noDeActa}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.padre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Madre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.madre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padrino:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.padrino}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Madrina:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.madrina}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Fecha Nacimiento:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.fechaNac}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Lugar Nacimiento:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.lugarNacimiento}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Registro Civil:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.registroCivil}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Fecha Registro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.fechaRegistro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Lugar Registro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{baul.objeto.lugar}}</strong></td>
+										    		</tr>
+										    		
+										    		
+									    		</tbody>	
+								    		</table>	
+								    </div>
+								    <h4>Notas Marginales</h4>
+								    <div class="row">
+								  			<table class="table table-bordered">
+									  				<thead>
+										  					<tr>
+											  						<th class="text-center" width="20%">Tipo de Nota Marginal</th>
+											  						<th class="text-center" width="15%">Fecha</th>
+											  						<th class="text-center" width="20%">Nota</th>
+											  						<th class="text-center" width="20%">Lugar</th>
+ 										  					</tr>	
+					 									</thead>
+					 									<tbody>
+					 											<tr ng-repeat = "notas in baul.objeto.notasMarginales">
+						 												<td>{{notas.tipoNota}}</td>
+						 												<td style="text-align: center">{{notas.fecha | date:"dd-MM-yyyy"}}</td>
+						 												<td>{{notas.nota}}</td>
+						 												<td>{{notas.lugar}}</td>
+ 						 							      </tr>
+					 									</tbody>
+								  			</table>
+							  		</div> 
+								    
+									</div>
+							</form>
+	      </div>	
+ 	      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalVerListado" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Listado</h4>
+		        </div> 
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Fecha:</h4>
+		        </div> 
+		        <div class="col-sm-3">					    
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="baul.fecha">
+						</div>
+						<div class="col-sm-1">
+								<a href="#" ng-click = "baul.buscarBautismos()" class="btn btn-default btn-primary">
+										<i class="fa fa-search"></i> Buscar
+								</a>
+						</div>	
+		        
+		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<thead>
+										    		<tr>
+												    	<th width="3%" style="margin: 0px; border: 0px; padding: 0px">
+																<input id="todos" type="checkbox" class="form-control" 
+																									ng-checked="false" 
+																									ng-click="baul.seleccionarTodos()" style="margin: 0px; border: 0px; padding: 0px" />
+															</th>
+											    		<th>No.</th>
+											    		<th>Hora</th>
+											    		<th>Bautizado</th>
+											    		<th>Estatus</th>
+											    		<th>Acción</th>
+										    		</tr>	
+									    		</thead>
+									    		<tbody>
+										    		<tr ng-repeat ="objeto in baul.arregloListado">
+											    		<td style="margin: 0px; border: 0px; padding: 0px">
+												    		<input type="checkbox" class="form-control" 
+				    											 ng-model="objeto.imprimir"  style="margin: 0px; border: 0px; padding: 0px"/>
+											    		</td>
+											    		<td style="width: 10%">{{$index + 1}}</td>
+											    		<td style="width: 10%">{{objeto.hora | date:"h:mm a"}}</td>
+											    		<td>{{objeto.nombreCompleto}}</td>
+											    		<td>
+												    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+																	  En Trámite
+																	</span>
+																	<span ng-if="objeto.estatus == 'bautizado'" class="label label-success">
+																	  Bautizado
+																	</span>
+											    		</td>
+												    	<td style="width: 10%">
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="baul.seleccionaFirma(objeto,1)" ng-if="objeto.estatus == 'bautizado'"><i class="fa fa-gear fa-print"></i></a> 
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="baul.seleccionaFirma(objeto,2)" ng-if="objeto.estatus == 'enTramite'"><i class="fa fa-gear fa-print"></i></a>
+												    	</td>	
+										    		</tr>
+									    		</tbody>	
+								    		</table>	
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" ng-click = "baul.seleccionaFirma({listado:'listado'},3)" class="btn btn-success" > Aceptar</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="baul.sacerdote_id" required>
+								<option ng-repeat="sac in baul.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="baul.imprimir(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>
+ 
+

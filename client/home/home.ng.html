@@ -1,91 +1,156 @@
 <!-- Menú de Administrador -->
-<section id="administrador" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'admin'">
-	<h1>Super Administrador</h1>
-  <div class="row">
+<section id="administrador" >
+  <div class="row" ng-if="currentUser.roles[0] == 'super admin'">
     <div class="col-sm-12">
-      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget">
+      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget" class="jarviswidget-color-blue jarviswidget jarviswidget-sortable">
         <header>
-          <h2>Opciones</h2>
+          <h2>Estructura de la Diócesis</h2>
         </header>
         <div>
           <div class="widget-body">
 						<div class="row">
 							<div class="col-sm-3">
-								<a ui-sref="root.importarContratantes" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Importar Contratantes</a>
+								<a ui-sref="root.zonasPastorales" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-sitemap"></i></span>ZONAS PASTORALES</a>
 							</div>
 							<div class="col-sm-3">
-								<a ui-sref="root.importarMovimientos" href="javascript:void(0);" class="btn btn-labeled btn-warning btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-university"></i></span>Importar Movimientos</a>
-							</div>		
+								<a ui-sref="root.decanatos" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-sun-o"></i></span>DECANATOS</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.parroquias" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-building"></i></span>PARROQUIAS</a>
+							</div>
 						</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row" ng-if="currentUser.roles[0] == 'Administrador' || currentUser.roles[0] == 'super admin'">
+    <div class="col-sm-12">
+      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget">
+        <header>
+          <h2>Usuarios</h2>
+        </header>
+        <div>
+          <div class="widget-body">
+						<div class="row">
+							<div class="col-sm-3" ng-if="currentUser.roles[0] == 'super admin'">
+								<a ui-sref="root.sacerdotes" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-user"></i></span>SACERDOTES</a>
+							</div>
+							<div class="col-sm-3" ng-if="currentUser.roles[0] == 'super admin'">
+								<a ui-sref="root.administradores" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-users"></i></span>ADMINISTRADORES</a>
+							</div>
+							<div class="col-sm-3" ng-if="currentUser.roles[0] == 'Administrador'">
+								<a ui-sref="root.usuarios" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-users"></i></span>USUARIOS</a>
+							</div>
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" ng-if="currentUser.roles[0] == 'super admin'">
+    <div class="col-sm-12">
+      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget">
+        <header>
+          <h2>ADMINISTRACIÓN</h2>
+        </header>
+        <div>
+          <div class="widget-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<a ui-sref="root.egresos" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-briefcase"></i></span>EGRESOS CONCEPTOS</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.egresosDetalle" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-reorder"></i></span>EGRESOS DETALLE</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.estipendios" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-money"></i></span>ESTIPENDIOS</a>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-sm-4">
+								<a ui-sref="root.importarBautizados" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-upload"></i></span>IMPORTAR BAUTIZADOS</a>
+							</div>
+							<div class="col-sm-4">
+								<a ui-sref="root.importarConfirmados" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-upload"></i></span>IMPORTAR CONFIRMADOS</a>
+							</div>
+							<div class="col-sm-4">
+								<a ui-sref="root.importarPrimerasComuniones" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-upload"></i></span>IMPORTAR P. COMUNIONES</a>
+							</div>
+						</div>
+						<br>
+						<div class="row">	
+							
+							<div class="col-sm-4">
+								<a ui-sref="root.importarMatrimonios" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-upload"></i></span>IMPORTAR MATRIMONIOS</a>
+							</div>
+							
+							<div class="col-sm-4">
+								<a ui-sref="root.importarNotasMarginales" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-upload"></i></span>IMPORTAR NOTAS MARGINALES</a>
+							</div>
+						</div>
+						
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" ng-if="currentUser.roles[0] != 'super admin'">
+    <div class="col-sm-12">
+      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget">
+        <header>
+          <h2>SACRAMENTOS</h2>
+        </header>
+        <div>
+          <div class="widget-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<a ui-sref="root.bautismosLista" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-child"></i></span>BAUTISMOS</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.confirmacionesLista" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-graduation-cap"></i></span>CONFIRMACIONES</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.primerasComunionesLista" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-circle-o"></i></span>PRIMERA COMUNION</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.matrimoniosLista" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-share-alt"></i></span>MATRIMONIOS</a>
+							</div>
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" ng-if="currentUser.roles[0] != 'super admin'">
+    <div class="col-sm-12">
+      <div data-widget-color="blue" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-jarvis-widget="data-jarvis-widget">
+        <header>
+          <h2>AGENDAS Y/O SERVICIOS</h2>
+        </header>
+        <div>
+          <div class="widget-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<a ui-sref="root.intensionesMisa" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-calendar-o"></i></span>AGENDA INTENCIONES</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.agenda" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-calendar"></i></span>CELEBRACIONES</a>
+							</div>
+							<div class="col-sm-3">
+								<a ui-sref="root.cobroEstipendio" href="javascript:void(0);" class="btn bg-color-blueDark txt-color-white btn-block" style="text-align: left"> <span class="btn-label"><i class="fa fa-lg fa-fw fa-money"></i></span>ESTIPENDIOS</a>
+							</div>
+						</div>	
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </section>
 
-<!-- Menú de Coordinador -->
-<section id="Coordinador" data-widget-grid="data-widget-grid" ng-if="currentUser.roles[0] == 'Contratante'">
-	<h2>Estado Cuenta: <bold>{{currentUser.profile.nombreCompleto}} </bold></h2>
-  <div class="row" ng-repeat="movimiento in ho.movimientos">
-		<div class="well">
-			<div class="col-sm-12">
-					<div class="col-sm-2"> 					    
-					    	<label>PREDIO:</label>
-					    	<span>{{movimiento.Nom_predio}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>PREDIO:</label>
-					    	<span>{{movimiento.Nom_programa}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>MANZANA:</label>
-					    	<span>{{movimiento.Imanz}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>LOTE:</label>
-					    	<span>{{movimiento.Ilote}}</span>
-					</div>
-					<div class="col-sm-2"> 					    
-					    	<label>PRECIO:</label>
-					    	<span>{{movimiento.Precio | currency}}</span>
-					</div>	
-			</div>		
-	
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-							<th width="5%"><div class="text-center">Recibo</th>
-							<th width="5%"><div class="text-center">Fecha Pago</th>
-							<th width="5%"><div class="text-center">Saldo Capital</th>
-							<th width="5%"><div class="text-center">Capital</th>
-							<th width="5%"><div class="text-center">C. ADMVA</th>
-							<th width="5%"><div class="text-center">Seg. Vida</th>
-							<th width="5%"><div class="text-center">Interes</th>
-							<th width="5%"><div class="text-center">Interes Moratorio</th>
-							<th width="5%"><div class="text-center">Total</th>
-							<th width="5%"><div class="text-center">Saldo</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="recibo in movimiento.recibos">
-							<td class="text-center" >{{recibo.recibo}}</td>
-					    <td class="text-center">{{recibo.fechaPago}}</td>
-					    <td class="text-right">{{recibo.saldoCapital | currency}}</td>
-					    <td class="text-right">{{recibo.capital | currency}}</td>
-					    <td class="text-right">{{recibo.administrativa | currency}}</td>
-					    <td class="text-right">{{recibo.seguro | currency}}</td>
-					    <td class="text-right">{{recibo.interes | currency}}</td>
-					    <td class="text-right">{{recibo.interesMoratorio | currency}}</td>
-					    <td class="text-right">{{recibo.total | currency}}</td>
-					    <td class="text-right">{{recibo.saldo | currency}}</td>
-					</tr>	
-				</tbody>
-			</table>	
-		
-		</div>
-	</div>
-</section>
-
- 
- 

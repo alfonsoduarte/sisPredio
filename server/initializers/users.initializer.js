@@ -8,6 +8,6 @@ Meteor.startup(function () {
       }
     });
     
-    Roles.addUsersToRoles(usuario_id, 'admin');
+    Roles.addUsersToRoles(usuario_id, 'super admin');
   }
 });

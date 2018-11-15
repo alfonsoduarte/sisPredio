@@ -1,5 +1,5 @@
 
-angular.module('sisPredios',
+angular.module('parroquias',
   [
     'angular-meteor',    
     'ngAnimate',

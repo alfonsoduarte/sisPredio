@@ -1,0 +1,227 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+			<i class="fa fa-search fa-fw "></i>
+				Matrimonios &gt; Buscar
+		</h1>
+	</div>
+</div>
+<div class="well">	
+	<div class="row">
+		<div class="col-sm-1">
+				<a href="./matrimonios" class="btn btn-default btn-primary">
+						<i class="fa fa-plus"></i> Nuevo
+				</a>
+		</div>	
+<!--
+		<div class="col-sm-1">
+				<a href="#" ng-click="matl.verListado()" class="btn btn-default btn-primary">
+						<i class="fa fa-file-text-o"></i> Listado
+				</a>
+		</div>
+-->
+		<div class="col-sm-9 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="matl.busqueda" btn-radio="'nombreEl'">Nombre El</label>
+ 						<label class="btn btn-default" ng-model="matl.busqueda" btn-radio="'nombreElla'">Nombre Ella</label>
+ 						<label class="btn btn-default" ng-model="matl.busqueda" btn-radio="'fechas'">Fecha</label>
+ 			  </div>
+			</div>	
+ 		</div>
+ 	</div> 
+  <div class="row">
+		<div class="col-sm-6" ng-if = "matl.busqueda == 'nombreEl' || matl.busqueda == 'nombreElla'">
+				<label>Apellido Paterno, ApellidoMaterno y Nombre (s)  </label>
+				<input class="form-control" type="text" placeholder="Buscar..." ng-model="matl.buscar.nombre" capitalize> 
+		</div>
+  	<div ng-if = "matl.busqueda == 'fechas'">
+				<div class="col-sm-3">	
+					<label>Fecha Inicial </label>				    
+					<input name="fechaInicial" type="date" format="dd/MM/yyyy" class="form-control" ng-model="matl.fechaInicial">
+				</div>
+				<div class="col-sm-3">					    
+					<label>Fecha Final </label>
+					<input name="fechaFinal" type="date" format="dd/MM/yyyy" class="form-control" ng-model="matl.fechaFinal">
+				</div>
+				<div class="col-sm-1">
+						<br>
+						<a href="#" ng-click = "matl.buscarBautismosFecha()" class="btn btn-default btn-primary">
+								<i class="fa fa-search"></i> Buscar
+						</a>
+				</div>
+ 		</div>
+ 	</div> 
+</div>
+
+<div class="well">
+	<div class="row">
+		<table class="table table-bordered table-hover">
+  		<thead>
+				<tr>	  		
+ 	    		<th style="text-align: center">No.</th>
+	    		<th style="text-align: center">Nombre</th>
+	    		<th style="text-align: center">Fecha</th>
+	    		<th style="text-align: center">Libro</th>
+	    		<th style="text-align: center">Foja</th>
+	    		<th style="text-align: center">N. Acta</th>
+ 	    		<th style="text-align: center">Estatus</th>
+	    		<th style="text-align: center">Acción</th>
+	    	</tr>	
+  		</thead>
+  		<tbody>
+    		<tr ng-repeat ="objeto in matl.arreglo">
+ 	    		<td style="width: 5%">{{$index + 1}}</td>
+ 	    		<td>{{matl.busqueda == "nombreEl" ? objeto.nombreCompletoEl : objeto.nombreCompletoElla}}</td>
+ 	    		<td>{{objeto.fecha | date: 'dd/MM/yyyy'}}</td>
+ 	    		<td>{{objeto.libro}}</td>
+ 	    		<td>{{objeto.foja}}</td>
+ 	    		<td>{{objeto.noDeActa}}</td>
+	    		<td style="width: 10%">
+		    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+							  En Trámite
+							</span>
+							<span ng-if="objeto.estatus == 'casados'" class="label label-success">
+							  Casados
+							</span>
+	    		</td>
+		    	<td style="width: 15%">
+				    	<a href="#" ng-click="matl.verDatos(objeto)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i></a>
+              <a href="/matrimonios/{{objeto._id}}" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-pencil ]"></i></a>
+              <a href="#" ng-click="matl.seleccionaFirma(objeto,1)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'casados'"><i class="[ glyphicon glyphicon-book ]"></i></a>
+<!-- 	            <a href="#" ng-click="matl.seleccionaFirma(objeto,2)" class="[ btn btn-default ]" ng-if="objeto.estatus == 'enTramite'"><i class="[ glyphicon glyphicon-file ]"></i></a>     -->
+		    	</td>	
+    		</tr>
+  		</tbody>	
+		</table>	
+	
+
+	</div>
+</div>
+
+<div id="modalVerDatos" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Matrimonio: {{matl.objeto.nombreCompletoEl}} Y {{matl.objeto.nombreCompletoElla}} </h4>
+		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<tbody>
+										    		<tr>
+											    		<td style="width: 20%">Fecha Matrimonio:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.fechaMatrimonio}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.parroquiaNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Sacerdote Asistió:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.sacerdoteNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="matl.objeto.estatus == 'casados'">
+											    		<td style="width: 20%">Libro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.libro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="matl.objeto.estatus == 'casados'">
+											    		<td style="width: 20%">Foja:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.foja}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="matl.objeto.estatus == 'casados'">
+											    		<td style="width: 20%">No. de Acta:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.noDeActa}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padres Sr.:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.padreEl}} Y {{matl.objeto.madreEl}} </strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padres Sra.:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.padreElla}} Y {{matl.objeto.madreElla}} </strong></td>
+										    		</tr>		
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padrino Sr.:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.padrinoEl}} Y {{matl.objeto.madrinaEl}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padrinos Sra.:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.padrinoElla}} Y {{matl.objeto.madrinaElla}}</strong></td>
+										    		</tr>	
+										    		 										    												    		
+										    		<tr>
+											    		<td style="width: 20%">Registro Civil:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.registroCivil}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Fecha Registro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.fechaRegistro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Lugar Registro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{matl.objeto.lugar}}</strong></td>
+										    		</tr>
+										    		
+										    		
+									    		</tbody>	
+								    		</table>	
+								    </div>
+								    
+									</div>
+							</form>
+	      </div>	
+ 	      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="matl.sacerdote_id" required>
+								<option ng-repeat="sac in matl.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="matl.imprimir(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>

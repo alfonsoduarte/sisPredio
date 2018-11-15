@@ -1,0 +1,407 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+				Agenda
+		</h1>
+	</div>
+</div>
+
+
+<div class="well">
+<div class="row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+			
+		<!-- new widget -->
+		<div class="jarviswidget jarviswidget-color-blueDark">
+
+		<header>
+			<span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+			<h2> Celebraciones </h2>
+			<div class="widget-toolbar">
+				<!-- add: non-hidden - to disable auto hide -->
+				<div class="btn-group">
+					<button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
+						Mostrar <i class="fa fa-caret-down"></i>
+					</button>
+					<ul class="dropdown-menu js-status-update pull-right">
+						<li>
+							<a href="javascript:void(0);" id="mt" ng-click="age.changeView('month')" >Mes</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" id="ag" ng-click="age.changeView('agendaWeek')">Semana</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" id="td" ng-click="age.changeView('agendaDay')">Hoy</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+
+		<!-- widget div-->
+		<div>
+			<div class="widget-body no-padding">
+				<!-- content goes here -->
+				<div class="widget-body-toolbar">
+					<br>
+					<div id="calendar" ui-calendar="age.uiConfig.calendar" ng-model="age.eventSources" calendar="myCalendar" class="calendar"> </div>
+				</div>
+				<!-- end content -->
+			</div>
+		</div>		
+	</div>
+		<!-- end widget div -->
+	</div>
+	
+	<!--
+<div class="col-sm-4">
+		<h4> Por Liquidar</h4>
+		<table class="table">
+				<thead>
+					
+				</thead>
+				
+				<tbody>
+					
+				</tbody>		
+		
+		</table>		
+	</div>	
+-->
+	
+</div>
+</div>
+	<!-- end widget -->
+
+
+<!--
+
+<div class="well">
+	<div class="row">	
+		<div class="col-sm-3">
+				<label>Fecha </label>
+				<input name="fechaConsulta" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="age.fecha">
+		</div>
+	</div>
+</div>
+
+<div class="well">
+	<div class="row">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center" width="10%"><div class="text-center">Hora</div></th>
+						<th class="text-center" width="10%"><div class="text-center">Celebración</div></th>
+						<th class="text-center" width="30%"><div class="text-center">Nombre</div></th>
+						<th class="text-center" width="5%"><div class="text-center">Total</div></th>
+						<th class="text-center" width="5%"><div class="text-center">Pagado</div></th>
+						<th class="text-center" width="10%"><div class="text-center">Celular</div></th>
+						<th class="text-center" width="5%"><div class="text-center">Estatus</div></th>
+						<th class="text-center" width="5%"><div class="text-center">Acción</div></th>
+					</tr>
+				</thead>
+				<tbody>
+			    <tr ng-repeat="objeto in age.arreglo">
+				    <td class="text-center">{{objeto.hora | date:"h:mm a"}}</td>
+				    <td class="text-left">{{objeto.estipendio}}</td>
+				    <td class="text-left">{{objeto.concepto}}</td>
+			    	<td class="text-right">{{objeto.total | currency}}</td>
+			    	<td class="text-right">{{objeto.cobro | currency}}</td>
+						<td class="text-center">{{objeto.celular}}</td>
+						<td>
+					    <div class="text-center">
+					    	<span ng-if="objeto.esAbono" class="label label-warning">
+								  Abono
+								</span>
+								<span ng-if="!objeto.esAbono" class="label label-success">
+								  Liquidado
+								</span>
+					    </div>
+			    	</td>	
+				    <td>
+						    <div class="text-center">
+							    <div class="btn-group">
+									  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    <span class="caret"></span>
+									    <span class="sr-only">Toggle Dropdown</span>
+									  </button>
+									  <ul class="dropdown-menu dropdown-menu-right text-left">
+									    <li><a href="#" ng-click="age.mostrarCobros(objeto.cobros)"> <i class="fa fa-eye"></i> Ver Pagos</a></li>
+											<li ng-if="objeto.esAbono"><a href="#" ng-click="age.mostrarModalLiquidacion(objeto)"><i class="fa fa-money"></i> Cobrar</a></li>
+									  </ul>
+									</div>
+						    </div>				    
+						</td>
+			    </tr>
+				</tbody>
+			</table>
+			
+	</div>
+</div>	
+-->
+
+
+<!--
+<div id="modalCobros" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Cobros</h4>
+		    </div>
+				<div class="modal-body">
+						<div  class="well">
+							<div class="row">
+									<table class="table table-bordered" style="font-size: small">
+										<thead>
+											<tr>
+												<th class="text-center" width="10%">Fecha Cobro</th>
+												<th class="text-center" width="10%">Hora</th>
+												<th class="text-rigth" width="5%">Pago</th>
+												<th class="text-center" width="3%">Acción</th>
+											</tr>
+										</thead>
+										<tbody>
+									    <tr ng-repeat="objeto in age.cobros">
+										    <td class="text-center">{{objeto.fechaCobro | date:"dd-MM-yyyy"}}</td>
+										    <td class="text-center">{{objeto.fechaCobro | date:"h:mm a"}}</td>
+										    <td class="text-center">{{objeto.cobro | currency}}</td>
+										    <td style="text-align: right">
+													<a href="#" ng-click="age.imprimirTicket(objeto._id)" class="btn btn-labeled btn-info" ><i class="fa fa-print"></i></a>
+												</td>
+									    </tr>
+										</tbody>
+									</table>
+									
+							</div>		
+						</div>	
+					
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+-->
+
+<!--
+<div id="modalLiquidacion" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Cobro</h4>
+		    </div>
+				<div class="modal-body">
+						<div  class="well">
+							<div class="row">
+								  <div class="col-sm-6" valida>					    
+										<label>Concepto *</label>
+										<input name="concepto"  type="text" class="form-control" ng-model="age.liquidacion.concepto" disabled="true" required>
+									</div>
+								 
+								 	 <div class="col-sm-2">					    
+										<label>Restante </label><br>
+										<span style="font-size: x-large">{{age.liquidacion.total - age.liquidacion.cobro | currency}}</span>
+									</div>
+								 	 
+								  <div class="col-sm-2" valida>					    
+										<label>Cobro *</label>
+										<input id="total" name="total" id="total" min="0" type="number" class="form-control" ng-model="age.liquidacion.pagar" required>
+									</div>
+							</div>		
+						</div>
+	      </div>	
+	      <div class="modal-footer">
+		      	<input type="submit" ng-click="age.cobrar(age.liquidacion,form2)" value="Cobrar" class="btn btn-success" valida-form formulario="form2">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+-->
+
+
+<div id="modalCelebracion" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Celebración</h4>
+		    </div>
+				<div class="modal-body">
+							<div class="jarviswidget jarviswidget-sortable" id="wid-id-11" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" role="widget">
+									<header role="heading">
+									<!--<h2><strong>Panel de Folios </strong></h2>-->
+									
+									<ul id="widget-tab-1" class="nav nav-tabs pull-left">
+							
+										<li class="active">
+											<a data-toggle="tab" href="#hr1" aria-expanded="false"> <i class="fa fa-lg fa-money"></i> <span class="hidden-mobile hidden-tablet"> Liquidar</span></a>
+										</li>
+										
+										<li class="">
+											<a data-toggle="tab" href="#hr2" aria-expanded="false"> <i class="fa fa-lg fa-dollar"></i> <span class="hidden-mobile hidden-tablet"> Cobros</span></a>
+										</li>
+							
+										<li class="">
+											<a data-toggle="tab" href="#hr3" aria-expanded="false"> <i class="fa fa-lg fa-pencil"></i> <span class="hidden-mobile hidden-tablet"> Modificar</span></a>
+										</li>
+							
+							
+									</ul>	
+									
+								<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+							
+								<!-- widget div-->
+								<div role="content">
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+							
+										<!-- widget body text-->
+										
+										<div class="tab-content padding-10">
+											
+											<div class="tab-pane fade active in" id="hr1">
+												<div class="well">		
+													<form name="form2" novalidate>	
+														<div class="row">
+															  <div class="col-sm-6" valida>					    
+																	<label>Concepto *</label>
+																	<input name="concepto"  type="text" class="form-control" ng-model="age.liquidacion.concepto" disabled="true" required>
+																</div>
+															 
+															 	<div class="col-sm-2">					    
+																	<label>Restante </label><br>
+																	<span style="font-size: x-large">{{age.liquidacion.total - age.liquidacion.cobro | currency}}</span>
+																</div>
+															 	 
+															  <div class="col-sm-2" valida>					    
+																	<label>Cobro *</label>
+																	<input id="total" name="total" id="total" min="0" type="number" class="form-control" 
+																				 ng-model="age.liquidacion.pagar" 
+																				 ng-disabled="age.puedeCobrar" required>
+																</div>
+																
+																<div class="col-sm-2 pull-right" style="padding: 6px">					  
+																	<br />  
+																	<input type="submit" ng-click="age.cobrar(age.liquidacion,form2)" 
+																											 ng-disabled="age.puedeCobrar" value="Cobrar" class="btn btn-success" valida-form formulario="form2">
+																</div>
+														</div>		
+													</form>			
+												</div>
+											</div>
+											
+											<div class="tab-pane fade" id="hr2">
+												<div  class="well">
+													<div class="row">
+															<table class="table table-bordered" style="font-size: small">
+																<thead>
+																	<tr>
+																		<th class="text-center" width="10%">Fecha Cobro</th>
+																		<th class="text-center" width="10%">Hora</th>
+																		<th class="text-rigth" width="5%">Pago</th>
+																		<th class="text-center" width="3%">Acción</th>
+																	</tr>
+																</thead>
+																<tbody>
+															    <tr ng-repeat="objeto in age.cobros">
+																    <td class="text-center">{{objeto.fechaCobro | date:"dd-MM-yyyy"}}</td>
+																    <td class="text-center">{{objeto.fechaCobro | date:"h:mm a"}}</td>
+																    <td class="text-center">{{objeto.cobro | currency}}</td>
+																    <td style="text-align: right">
+																			<a href="#" ng-click="age.imprimirTicket(objeto._id)" class="btn btn-labeled btn-info" ><i class="fa fa-print"></i></a>
+																		</td>
+															    </tr>
+																</tbody>
+															</table>
+															
+													</div>		
+												</div>
+												
+													
+											</div>
+											
+											<div class="tab-pane fade" id="hr3">
+												
+												<div class="well">		
+													<form name="form3" novalidate>	
+														<div class="row">
+															  <div class="col-sm-6" valida>					    
+																	<label>Concepto *</label>
+																	<input name="concepto"  type="text" class="form-control" ng-model="age.liquidacion.concepto" disabled="true" required>
+																</div>
+															 																
+																<div class="col-sm-3" valida>
+																		<label>Fecha *</label>
+																		<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" 
+																					 ng-model="age.liquidacion.fecha" required="">
+																</div>
+															 	
+															 	<div class="col-sm-3" valida>
+														    	<label>Hora *</label>	
+														    	<input name="hora" type="time" class="form-control" ng-model="age.liquidacion.hora" required>		
+													    	</div>
+														</div>		
+														<br>
+														<div class="row">	 	 
+																<div class="col-sm-2 pull-right" style="padding: 6px">					  
+																	<br />  
+																	<input type="submit" ng-click="age.actualizar(age.liquidacion,form3)" value="Actualizar" class="btn btn-success" valida-form formulario="form3">
+																</div>
+														</div>		
+													</form>			
+												</div>
+												
+											</div>
+										</div>
+										<!-- end widget body text-->
+										
+										<!-- widget footer -->
+										<div class="widget-footer text-right">
+
+										</div>
+										<!-- end widget footer -->
+										
+									</div>
+									<!-- end widget content -->
+									
+								</div>
+								<!-- end widget div -->
+							</div>
+	      </div>	
+	      <div class="modal-footer">
+<!--
+		      	<input type="submit" ng-click="age.cobrar(age.liquidacion,form2)" value="Cobrar" class="btn btn-success" valida-form formulario="form2">-->
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+
+
+
+
+
+
+	

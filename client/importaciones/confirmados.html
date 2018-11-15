@@ -1,0 +1,48 @@
+<h2>Importar Confirmaciones</h2>
+<div class="row">
+	
+	<div class="col-sm-4">
+		<label>Parroquia *</label>
+		<select name="estipendio" class="form-control select2" ng-model="icon.parroquia_id" >
+			<option ng-repeat="obj in icon.parroquias" value="{{obj._id}}">{{obj.nombre}}</option>
+		</select>
+	</div>
+	
+	<div class="col-sm-12">
+			<form name="form" class="form-horizontal" role="form" novalidate >
+				<h4>Archivo</h4>
+		  	<div class="well">	     
+			    <div class="row">			    				
+						<p><input type="file" name="xlfile" accept=".xlsx" id="xlf" /></p>
+			    </div>			    			    
+			    <div class="row">
+						<div class="col-sm-3">
+							<input ng-click="icon.guardar()" value="Guardar" class="btn btn-primary"/>			
+						</div>
+					</div> 
+		  	</div> 	
+		  </form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="15%"><div class="text-center">Apellido Paterno</div></th>
+					<th width="15%"><div class="text-center">Apellido Materno</div></th>
+					<th width="15%"><div class="text-center">Nombre</div></th>
+					<th width="10%"><div class="text-center">Fecha Confirmación </div></th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="objeto in icon.arreglo.CONFIRMADOS">
+		    	<td>{{objeto.APP_CON}}</td>
+			    <td>{{objeto.APM_CON}}</td>
+			    <td>{{objeto.NOM_CON}}</td>
+			    <td>{{objeto.FECHA_CON | date:"dd-MM-yyyy"}}</td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>

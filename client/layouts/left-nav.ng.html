@@ -1,44 +1,235 @@
 <nav>
 	<ul data-smart-menu>	
-		<!--	
+			
 		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.usuarios" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
-      	  <i class="fa fa-lg fa-fw fa-users"></i>
-					<span class="menu-item-parent">Usuarios</span>
-			 </a>
-		 </li>
-		 -->
-		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.home" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
-      	  <i class="fa fa-lg fa-fw fa-money"></i>
-					<span class="menu-item-parent">Estado de Cuenta</span>
-			 </a>
-		 </li>
-		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.cambioContrasena" tilte="UAS" ng-if="currentUser.roles[0] == 'Contratante'">
-      	  <i class="fa fa-lg fa-fw fa-user"></i>
-					<span class="menu-item-parent">Cambiar Contraseña</span>
-			 </a>
-		 </li>
-		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.importarContratantes" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
-      	  <i class="fa fa-lg fa-fw fa-university"></i>
-					<span class="menu-item-parent">Importar Contratantes</span>
-			 </a>
-		 </li>
-		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.importarMovimientos" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
-      	  <i class="fa fa-lg fa-fw fa-university"></i>
-					<span class="menu-item-parent">Importar Movimientos</span>
-			 </a>
-		 </li>
-		 <li data-ui-sref-active="active">
-     	 <a ui-sref="root.listarContratantes" tilte="UAS" ng-if="currentUser.roles[0] == 'admin'">
-      	  <i class="fa fa-lg fa-fw fa-users"></i>
-					<span class="menu-item-parent">Cambiar Contraseña</span>
+     	 <a ui-sref="root.home" tilte="Parroquias">
+      	  <i class="fa fa-lg fa-fw fa-home"></i>
+					<span class="menu-item-parent">Inicio</span>
 			 </a>
 		 </li>
 		 
-    
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.diocesis" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-institution"></i>
+					<span class="menu-item-parent">Diócesis</span>
+			 </a>
+		 </li>
+		 
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.zonasPastorales" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-sitemap"></i>
+					<span class="menu-item-parent">Zonas Pastorales</span>
+			 </a>
+		 </li>
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.decanatos" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-sun-o"></i>
+					<span class="menu-item-parent">Decanatos</span>
+			 </a>
+		 </li>
+		 
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.diaconos" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-user"></i>
+					<span class="menu-item-parent">Diáconos</span>
+			 </a>
+		 </li>
+		 
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.parroquias" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-building"></i>
+					<span class="menu-item-parent">Parroquias</span>
+			 </a>
+		 </li>
+		 
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.sacerdotes" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-user"></i>
+					<span class="menu-item-parent">Sacerdotes</span>
+			 </a>
+		 </li>
+		 
+		 <li data-ui-sref-active="active">
+     	 <a ui-sref="root.administradores" tilte="Parroquias" ng-if="currentUser.roles[0] == 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-users"></i>
+					<span class="menu-item-parent">Administradores</span>
+			 </a>
+		 </li>
+		 
+		 <li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] == 'super admin'">
+				<i class="fa fa-lg fa-fw fa-tags"></i>
+				<span class="menu-item-parent">Economía</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.egresos" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-briefcase"></i>
+						<span class="menu-item-child">Egresos Conceptos</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.egresosDetalle" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-reorder"></i>
+						<span class="menu-item-child">Egresos Detalle</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.estipendios" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-money"></i>
+						<span class="menu-item-child">Estipendios</span>
+					</a>
+				</li>
+				
+			</ul>
+		 </li>
+		 
+		 <li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] == 'super admin'">
+				<i class="fa fa-lg fa-fw fa-calendar"></i>
+				<span class="menu-item-parent">Agendas</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.santorales" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-user-md"></i>
+						<span class="menu-item-child">Santorales</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.tiemposLiturgicos" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-clock-o"></i>
+						<span class="menu-item-child">Tiempos Litúrgicos</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.agendaDiocesana" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-calendar-o"></i>
+						<span class="menu-item-child">Agenda Diocesana</span>
+					</a>
+				</li>				
+			</ul>
+		 </li>
+		 
+		 
+		 <li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] != 'super admin'">
+				<i class="fa fa-lg fa-fw fa-tags"></i>
+				<span class="menu-item-parent">Sacramentos</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.bautismosLista" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-child"></i>
+						<span class="menu-item-child">Bautismos</span>
+					</a>
+				</li>			
+				<li data-ui-sref-active="active">
+					<a ui-sref="root.confirmacionesLista" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-graduation-cap"></i>
+						<span class="menu-item-child">Confirmaciones</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					<a ui-sref="root.primerasComunionesLista" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-circle-o"></i>
+						<span class="menu-item-child">Primera Comunión</span>
+					</a>
+				</li>
+				<li data-ui-sref-active="active">
+					<a ui-sref="root.matrimoniosLista" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-share-alt"></i>
+						<span class="menu-item-child">Matrimonios</span>
+					</a>
+				</li>
+			</ul>
+		 </li>
+		
+		<li data-ui-sref-active="active">
+			<a ui-sref="root.intensionesMisa" tilte="Parroquias" ng-if="currentUser.roles[0] != 'super admin'" >
+				<i class="fa fa-lg fa-fw fa-calendar-o"></i>
+				<span class="menu-item-parent">Agenda Intenciones</span>
+			</a>
+		</li>
+		 
+		<li data-ui-sref-active="active">
+     	 <a ui-sref="root.agenda" tilte="Parroquias" ng-if="currentUser.roles[0] != 'super admin'">
+      	  <i class="fa fa-lg fa-fw fa-calendar"></i>
+					<span class="menu-item-parent">Agenda Celebraciones</span>
+			 </a>
+		</li>
+		
+		<li data-ui-sref-active="active">
+     	<a ui-sref="root.cobroEstipendio" tilte="Parroquias" ng-if="currentUser.roles[0] != 'super admin'">
+      	<i class="fa fa-lg fa-fw fa-money"></i>
+				<span class="menu-item-parent">Estipendios</span>	
+			</a>
+		</li>
+		
+		<li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] == 'Administrador' || currentUser.roles[0] == 'Sacerdote'">
+				<i class="fa fa-lg fa-fw fa-dollar"></i>
+				<span class="menu-item-parent">Economía</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.registroEgreso" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-check"></i>
+						<span class="menu-item-child">Registro</span>
+					</a>
+				</li>			
+				<li data-ui-sref-active="active">
+					<a ui-sref="root.apoyoParroquia" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-sliders"></i>
+						<span class="menu-item-child">Configurar Apoyo</span>
+					</a>
+				</li>
+			</ul>
+		</li>		
+		
+		<li data-ui-sref-active="active">
+     	<a ui-sref="root.notificaciones" tilte="Parroquias" ng-if="currentUser.roles[0] != 'super admin'">
+      	<i class="fa fa-lg fa-fw fa-check-circle-o"></i>
+				<span class="menu-item-parent">Panel Notificaciones</span>	
+			</a>
+		</li>
+		
+		<li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] != 'super admin'">
+				<i class="fa fa-lg fa-fw fa-file-text"></i>
+				<span class="menu-item-parent">Reportes</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.cobranza" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-money"></i>
+						<span class="menu-item-child">Cobranza</span>
+					</a>
+				</li>			
+			</ul>
+		</li>
+		
+		<li data-menu-collapse>
+			<a href="#" ng-show="currentUser.roles[0] != 'super admin'">
+				<i class="fa fa-lg fa-fw fa-reorder"></i>
+				<span class="menu-item-parent">Trámites</span>
+			</a>
+			<ul>
+				<li data-ui-sref-active="active">
+					 <a ui-sref="root.cartaInexistencia" tilte="Parroquias">
+						<i class="fa fa-lg fa-fw fa-exclamation"></i>
+						<span class="menu-item-child">Carta Inexistencia</span>
+					</a>
+				</li>			
+			</ul>
+		</li>
+		
+		<li data-ui-sref-active="active">
+     	 <a ui-sref="root.usuarios" tilte="Parroquias" ng-if="currentUser.roles[0] == 'Administrador' || currentUser.roles[0] == 'Sacerdote'">
+      	  <i class="fa fa-lg fa-fw fa-users"></i>
+					<span class="menu-item-parent">Usuarios</span>
+			 </a>
+		</li>
+		 
   </ul>
 </nav>

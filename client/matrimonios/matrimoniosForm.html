@@ -1,0 +1,429 @@
+<h2><span ng-if = "mat.action">Nuevo</span> <span ng-if = "!mat.action">Actualizar</span> Matrimonio</h2>
+<div class="row">
+	<div class="col-sm-12">
+		
+		<form name="form" class="form-horizontal" role="form">
+		  	<div class="well">	  
+					<div class="row">
+							<div class="col-sm-4" valida>
+						    <label>Nombre del Sr. *</label>
+					    	<input name="nombreEl" type="text" class="form-control" placeholder="Nombre" ng-model="mat.objeto.nombreEl" required capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Apellido Paterno  del Sr.</label>
+					    	<input name="apellidoPaternoEl" type="text" class="form-control" placeholder="Apellido Paterno" ng-model="mat.objeto.apellidoPaternoEl" capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Apellido Materno del Sr.</label>
+					    	<input name="apellidoMaternoEl" type="text" class="form-control" placeholder="Apellido Materno" ng-model="mat.objeto.apellidoMaternoEl" capitalize>
+					    </div>
+					</div>	
+					<div class="row">
+							<div class="col-sm-4" valida>
+						    <label>Nombre de la Sra. *</label>
+					    	<input name="nombreElla" type="text" class="form-control" placeholder="Nombre" ng-model="mat.objeto.nombreElla" required capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Apellido Paterno de la Sra. *</label>
+					    	<input name="apellidoPaternoElla" type="text" class="form-control" placeholder="Apellido Paterno" ng-model="mat.objeto.apellidoPaternoElla" capitalize>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Apellido Materno de la Sra.</label>
+					    	<input name="apellidoMaternoElla" type="text" class="form-control" placeholder="Apellido Materno" ng-model="mat.objeto.apellidoMaternoElla" capitalize>
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">					    
+							<label>Fecha matrimonio *</label>
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="mat.objeto.fecha" required="">
+						</div>	
+						<div class="col-sm-2" valida> 					    
+							<label>Libro *</label>
+							<input name="libro" type="text" class="form-control" placeholder="Libro" ng-model="mat.objeto.libro" ng-disabled = "mat.estatus" required capitalize>
+						</div>
+						<div class="col-sm-2" valida>					    
+							<label>Foja *</label>
+							<input name="foja" type="text" class="form-control" placeholder="Foja" ng-model="mat.objeto.foja" ng-disabled = "mat.estatus"  required capitalize>
+						</div>		    				    	    
+						<div class="col-sm-2" valida>					    
+							<label>No. de Acta *</label>
+							<input name="noActa" type="text" class="form-control" placeholder="No. dec Acta" ng-model="mat.objeto.noDeActa" ng-disabled = "mat.estatus" required capitalize>
+						</div>
+						<div class="col-sm-3" valida>
+							<label >Estatus *</label>
+							<select name="estatus" ng-model="mat.objeto.estatus" data-placeholder="Seleccione" ng-change="mat.cambiarEstatus()" class="form-control" required >
+									<option value=""></option>
+									<option value="casados">Casados</option>
+									<option value="enTramite">En trámite</option>
+							</select>
+						</div>		
+					</div>
+					<div class="row">
+						 <div class="col-sm-4" valida>
+							<label >Tipo Sacerdote *</label>
+							<select name="tipoSacerdote" ng-model="mat.objeto.tipoSacerdote" ng-change="mat.cargarSacerdotes()" class="form-control" required>
+									<option value=""></option>
+									<option value="PARROQUIA">PARROQUIA</option>
+									<option value="DIOCESIS">DIOCESIS</option>
+									<option value="OTRO">OTRO</option>
+									<option value="IMPORTADO" ng-if = "mat.objeto.tipoSacerdote == 'IMPORTADO'" >IMPORTADO</option>
+ 							</select>
+						</div>
+						
+						<div class="col-sm-4" ng-if="mat.objeto.tipoSacerdote == 'PARROQUIA' || mat.objeto.tipoSacerdote == 'DIOCESIS'" ng-selected="mat.seleccionaSacerdotesAsistio()" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="js-example-basic-single js-states form-control" ng-model="mat.objeto.sacerdote_id" required>
+								<option ng-repeat="sac in mat.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>	
+						
+<!--
+						<div class="col-sm-4" ng-if="mat.objeto.tipoSacerdote == 'OTRO' || mat.objeto.tipoSacerdote == 'IMPORTADO'" valida>
+							<label>Sacerdote *</label>
+							<input name="fornaneo" type="text" class="form-control" placeholder="Sacerdote" ng-model="mat.objeto.sacerdoteNombre" required="" capitalize>
+						</div>
+-->
+						
+						<div class="col-sm-4" valida>					    
+							<label>No. de Expediente *</label>
+							<input name="noExpediente" type="text" class="form-control" placeholder="No. de Expediente" ng-model="mat.objeto.noExpediente" ng-disabled = "mat.estatus" required capitalize>
+						</div>
+						
+ 					</div>
+ 					
+ 					<div class="row">		
+							<div class="col-sm-6" valida>
+								<label>Asistió *</label>
+								<input name="sacerdoteNombre" type="text" class="form-control" placeholder="Sacerdote" ng-model="mat.objeto.sacerdoteNombre" required="" capitalize>
+							</div>
+			  	</div>
+ 					
+ 					<div class="row">
+	 					<div class="col-sm-6">					    
+							<label>Fecha Bautismo El </label>
+							<input name="fechaBautismoEl" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="mat.objeto.fechaBautismoEl">
+						</div>
+						
+						<div class="col-sm-6">					    
+							<label>Fecha Bautismo Ella</label>
+							<input name="fechaBautismoElla" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="mat.objeto.fechaBautismoElla">
+						</div>
+	 					
+ 					</div>
+					<div class="row">
+ 						<div class="col-sm-6" valida> 					    
+							<label>Padre Sr.</label>
+							<input name="padreEl" type="text" class="form-control" placeholder="Padre Sr." ng-model="mat.objeto.padreEl" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida> 					    
+							<label>Madre Sr.</label>
+							<input name="madreEl" type="text" class="form-control" placeholder="Madre Sr." ng-model="mat.objeto.madreEl" required="" capitalize>
+						</div>
+					</div>
+					<div class="row">
+ 						<div class="col-sm-6" valida> 					    
+							<label>Padre Sra.</label>
+							<input name="padreElla" type="text" class="form-control" placeholder="Padre Sra." ng-model="mat.objeto.padreElla" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida> 					    
+							<label>Madre Sra.</label>
+							<input name="madreElla" type="text" class="form-control" placeholder="Madre Sra." ng-model="mat.objeto.madreElla" required="" capitalize>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Testigo 1 Sr. *</label>
+							<input name="testigo1El" type="text" class="form-control" placeholder="Testigo 1" ng-model="mat.objeto.testigo1Ell" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Testigo 2 Sr. *</label>
+							<input name="testigo2El" type="text" class="form-control" placeholder="Testigo 2" ng-model="mat.objeto.testigo2Ell" required="" capitalize>
+						</div>			
+					</div>
+					
+						<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Testigo 1 Sra. *</label>
+							<input name="testigo1Ella" type="text" class="form-control" placeholder="Testigo 1" ng-model="mat.objeto.testigo1Ella" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Testigo 2 Sra. *</label>
+							<input name="testigo2Ella" type="text" class="form-control" placeholder="Testigo 2" ng-model="mat.objeto.testigo2Ella" required="" capitalize>
+						</div>			
+					</div>
+					
+						
+					<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Padrino Sr. *</label>
+							<input name="padrinoEl" type="text" class="form-control" placeholder="Padrino Sr." ng-model="mat.objeto.padrinoEl" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Madrina Sr. *</label>
+							<input name="madrinaEl" type="text" class="form-control" placeholder="Madrina Sr." ng-model="mat.objeto.madrinaEl" required="" capitalize>
+						</div>
+						
+					</div>	
+					
+					<div class="row">
+						<div class="col-sm-6" valida>					    
+							<label>Padrino Sra. *</label>
+							<input name="padrinoElla" type="text" class="form-control" placeholder="Padrino Sra." ng-model="mat.objeto.padrinoElla" required="" capitalize>
+						</div>
+						<div class="col-sm-6" valida>					    
+							<label>Madrina Sra. *</label>
+							<input name="madrinaElla" type="text" class="form-control" placeholder="Madrina Sra." ng-model="mat.objeto.madrinaElla" required="" capitalize>
+						</div>
+						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-4">					    
+							<label>Registro Civil No.</label>
+							<input name="registroCivil" type="text" class="form-control" placeholder="Registro Civil No." ng-model="mat.objeto.registroCivil" capitalize>
+						</div>
+						<div class="col-sm-4">					    
+							<label>Lugar</label>
+							<input name="lugar" type="text" class="form-control" placeholder="Lugar" ng-model="mat.objeto.lugar" capitalize>
+						</div>
+						<div class="col-sm-4">					    
+							<label>Fecha Registro</label>
+							<input name="fechaRegistro" type="date" format="dd/MM/yyyy" class="form-control" ng-model="mat.objeto.fechaRegistro">
+						</div>
+					</div>
+					
+					<div class="row" ng-if="mat.objeto.estatus == 'casados'">
+						
+						<div class="col-sm-4" valida>
+							<label >Tipo Sacerdote Para Constancia *</label>
+							<select name="tipoSacerdoteParroco" ng-model="mat.objeto.tipoSacerdoteParroco" ng-change="mat.cargarSacerdotesParroquia()" class="form-control" required>
+									<option value=""></option>
+									<option value="PARROQUIA">PARROQUIA</option>
+									<option value="OTRO">OTRO</option>
+ 							</select>
+						</div>
+						
+						<div class="col-sm-4" ng-if="mat.objeto.tipoSacerdoteParroco == 'PARROQUIA'" ng-selected="mat.seleccionaSacerdotesParroquia()" valida>
+							<label for="sacerdoteParroco_id">Sacerdote *</label>
+							<select name="sacerdoteParroco_id" class="js-example-basic-single js-states form-control" ng-model="mat.objeto.sacerdoteParroco_id" required>
+								<option ng-repeat="sac in mat.sacerdotesConstancia" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row" ng-if="mat.objeto.estatus == 'casados'">	
+						
+						<div class="col-sm-6" valida>
+							<label>Pbro. Firmó Constancia *</label>
+							<input name="fornaneoConstancia" type="text" class="form-control" placeholder="Sacerdote" ng-model="mat.objeto.parroco" required="" capitalize>
+						</div>
+
+					</div>
+					
+		  	</div> 
+		  	
+		  	<h3>Notificación</h3> 
+		  	<a href="#" class="btn btn-default btn-info" ng-click = "mat.agregarNotificacion()" ng-disabled = "mat.estatus">
+						Crear Notificación
+				</a>
+		  	<div class="well">
+			  		<div class="row">
+								<div class="col-sm-12">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th class="text-center" width="10%">Fecha</th>
+													<th class="text-center" width="20%">Nombre</th>
+													<th class="text-center" width="20%">Parroquia</th>
+													<th class="text-center" width="15%">Lugar</th>
+													<th class="text-center" width="5%">Folio</th>
+													<th class="text-center" width="5%">Foja</th>
+													<th class="text-center" width="5%">Acta</th>
+													<th class="text-center" width="5%">Tipo</th>
+													<th class="text-center" width="5%">Estatus</th>													
+													<th class="text-center" width="5%">Acción</th>
+												</tr>
+											</thead>
+											<tbody>
+										    <tr ng-repeat="objeto in mat.notificaciones">
+											    <td style="text-align: center"> {{objeto.fecha | date: "MM/dd/yyyy"}}</td>
+											    <td> {{objeto.nombreCompleto}}</td>
+											    <td> {{objeto.parroquiaDestino}}</td>
+											    <td> {{objeto.lugarDestino}}</td>
+											    <td> {{objeto.libro}}</td>
+											    <td> {{objeto.foja}}</td>
+											    <td> {{objeto.noDeActa}}</td>
+											    <td> {{objeto.tipo}}</td>
+											    <td>
+													    <div class="text-center">
+													    	<span ng-if="objeto.estatus == 1" class="label label-warning">
+																  Pendiente
+																</span>
+																<span ng-if="objeto.estatus == 2" class="label label-success">
+																  Aplicada
+																</span>
+														  </div>
+													</td>
+											    <td>
+													    <div class="text-center">
+														    <div class="btn-group" ng-if="objeto.estatus == 1">
+																  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																    <span class="caret"></span>
+																    <span class="sr-only">Toggle Dropdown</span>
+																  </button>
+																  <ul class="dropdown-menu dropdown-menu-right text-left">
+																    <li><a href="#" ng-click = "mat.editarNotificacion(objeto)" >Editar</a></li>
+																    <li><a href="#" ng-click = "mat.seleccionaFirma(objeto)" >Imprimir</a></li>
+																  </ul>
+																</div>
+													    </div>				    
+													</td>
+										    </tr>
+											</tbody>
+										</table>
+										
+								</div>
+						</div>
+		  	</div>
+		  	 
+		  	<div class="well">
+			  		<div class="row">
+							<div class="col-sm-4">
+								<input type="submit" ng-click="mat.guardar(mat.objeto,form)" value="Guardar" class="btn btn-success" ng-show="mat.action" valida-form formulario="form">
+								<input type="submit" ng-click="mat.actualizar(mat.objeto,form)" value="Actualizar" class="btn btn-success" ng-show="!mat.action" valida-form formulario="form">
+								<a href="./matrimoniosLista" class="btn btn-default btn-primary">
+									 Regresar
+								</a>
+							</div>
+						</div>
+		  	</div>	
+		  </form>
+	</div>
+</div>
+
+
+<div id="modalNotificacion" class="modal fade bs-intencion-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    <form name="form2" novalidate>
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel" ng-show="mat.actionN">Agregar Notificación</h4>
+		        <h4 class="modal-title" id="myModalLabel" ng-show="!mat.actionN">Actualizar Notificación</h4>
+		    </div>
+				<div class="modal-body">
+						<div  class="well">
+							<div class="row">
+									<div class="col-sm-1">
+										<label class="radio-inline">
+											<input type="radio" name="persona" ng-model = "mat.notificacion.persona" value="El">
+											Él
+										</label>
+									</div>
+										
+									<div class="col-sm-1">
+										<label class="radio-inline">
+											<input type="radio" name="persona" ng-model = "mat.notificacion.persona" value="Ella">
+											Ella
+										</label>
+									</div>
+							</div>	
+							
+							<div class="row">  
+								  <div class="col-sm-3" valida>
+										<label>Sistema o Carta *</label>
+										<select name="tipoN" ng-model="mat.notificacion.tipo" class="form-control" required >
+												<option value="sistema">Sistema</option>
+												<option value="carta">Carta</option>
+										</select>
+									</div>
+								  
+								  <div class="col-sm-5" ng-if="mat.notificacion.tipo == 'carta'" valida>					    
+										<label>Nombre Parroquia *</label>
+										<input name="parroquiaN"  type="text" class="form-control" ng-model="mat.notificacion.parroquiaDestino" required capitalize>
+									</div>
+								 	 
+								  <div class="col-sm-4" ng-if="mat.notificacion.tipo == 'carta'" valida>					    
+										<label>Lugar *</label>
+										<input name="lugarN"  type="text" class="form-control" ng-model="mat.notificacion.lugarDestino" required capitalize>
+									</div>
+									
+									<div class="col-sm-6" ng-if="mat.notificacion.tipo == 'sistema'" valida>
+										<label >Parroquia *</label>
+										<select name="parroquiaDestino_id" class="js-example-basic-single js-states form-control" ng-model="mat.notificacion.parroquiaDestino_id" required>
+											<option ng-repeat="obj in mat.parroquias" value="{{obj._id}}">{{obj.nombre}}</option>
+										</select>
+									</div>
+							</div>		
+							<div class="row">
+									
+									<div class="col-sm-12" ng-if="mat.notificacion.tipo == 'carta'" valida>					    
+										<label>Diócesis *</label>
+										<input name="diocesis"  type="text" class="form-control" ng-model="mat.notificacion.diocesis" required capitalize>
+									</div>
+								
+							</div>
+							<div class="row"> 
+									<div class="col-sm-6" ng-if="mat.notificacion.tipo == 'carta'" valida>					    
+										<label>Sacerdote Notificar *</label>
+										<input name="sacerdoteNotificar"  type="text" class="form-control" ng-model="mat.notificacion.sacerdoteNotificar" required capitalize>
+									</div>
+									<div class="col-sm-2" valida> 					    
+										<label>Libro *</label>
+										<input name="libroN" type="text" class="form-control" placeholder="Libro" ng-model="mat.notificacion.libro" required="" capitalize>
+									</div>
+									<div class="col-sm-2" valida>					    
+										<label>Foja *</label>
+										<input name="fojaN" type="text" class="form-control" placeholder="Foja" ng-model="mat.notificacion.foja" required="" capitalize>
+									</div>		    				    	    
+									<div class="col-sm-2" valida>					    
+										<label>No. de Acta *</label>
+										<input name="noActaN" type="text" class="form-control" placeholder="No. dec Acta" ng-model="mat.notificacion.noDeActa" required="" capitalize>
+									</div>
+							</div>		
+						</div>
+	      </div>	
+	      
+	      <div class="modal-footer">
+		      	<input type="submit" ng-click="mat.guardarNotificacion(mat.notificacion,form2)" value="Aceptar" ng-show="mat.actionN" class="btn btn-success" valida-form formulario="form2">
+		      	<input type="submit" ng-click="mat.actualizarNotificacion(mat.notificacion,form2)" value="Actualizar" ng-show="!mat.actionN" class="btn btn-success" valida-form formulario="form2">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		    </div>
+		  </form>   
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="mat.sacerdoteFirma_id" required>
+								<option ng-repeat="sac in mat.sacerdotesFirma" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="mat.imprimirNotificacion(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>

@@ -1,0 +1,151 @@
+<!-- Tabla de Visitados Analistas -->
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" width="5%">No.</th>
+			<th class="text-center" width="20%">Nombre</th>
+			<th class="text-center" width="15%">Tipo</th>
+			<th class="text-center" width="15%">Parroquia</th>
+			<th class="text-center" width="15%">Lugar</th>
+			<th class="text-center" width="5%">Fecha</th>
+			<th class="text-center" width="5%">Folio</th>
+			<th class="text-center" width="5%">Foja</th>
+			<th class="text-center" width="5%">Acta</th>
+			<th class="text-center" width="5%">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+    <tr ng-repeat="objeto in not.notificacionesPorAplicar">
+	    <td class="text-center">{{$index + 1}}</td>
+	    <td>{{objeto.nombreCompleto}}</td>
+	    <td>{{objeto.tipoNota}}</td>
+	    <td>{{objeto.parroquiaOrigen}}</td>
+	    <td>{{objeto.lugarOrigen}}</td>
+	    <td>{{objeto.fechaSacramento | date : "dd/MM/yyyy"}}</td>
+	    <td>{{objeto.libro}}</td>
+	    <td>{{objeto.foja}}</td>
+	    <td>{{objeto.noDeActa}}</td>
+	    <td>
+			    <div class="text-center">
+				    <div class="btn-group">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-right text-left">
+						    <li><a href="#" ng-click = "not.buscarBautizados(objeto)">Aplicar</a></li>
+						    <li><a href="#" ng-click = "not.verNota(objeto.nota)">Ver Nota</a></li>
+						  </ul>
+						</div>
+			    </div>				    
+			</td>
+    </tr>
+	</tbody>
+</table>
+
+
+
+<!--		 //////////////////////////////////////////////////////////// -->
+
+<div id="modalAplicarBautizado" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Buscar Bautizado</h4>
+		    </div>
+				<div class="widget-body">
+							<form name="form2" novalidate>
+									<div class="well">	 
+										<div class="row">
+											<div class="col-sm-6">
+													<label>Apellido Paterno, ApellidoMaterno y Nombre (s)  </label>
+													<input class="form-control" type="text" placeholder="Buscar..." ng-model="not.buscar.nombre" capitalize> 
+											</div>
+									 	</div>  
+									 	<br>  
+								    <div class="row">
+								    		<table class="table table-bordered table-hover">
+										  		<thead>
+														<tr>	  		
+										 	    		<th style="text-align: center; width: 5%;">No.</th>
+											    		<th style="text-align: center; width: 20%;">Nombre</th>
+											    		<th style="text-align: center; width: 10%;">Fecha</th>
+											    		<th style="text-align: center; width: 8%;">Libro</th>
+											    		<th style="text-align: center; width: 8%;">Foja</th>
+											    		<th style="text-align: center; width: 8%;">N. Acta</th>
+										 	    		<th style="text-align: center; width: 8%;">Estatus</th>
+										 	    		<th style="text-align: center; width: 8%;">Acción</th>
+											    	</tr>	
+										  		</thead>
+										  		<tbody>
+										    		<tr ng-repeat ="objeto in not.arreglo">
+										 	    		<td style="width: 5%">{{$index + 1}}</td>
+										 	    		<td>{{objeto.nombreCompleto}}</td>
+										 	    		<td>{{objeto.fecha | date: 'dd/MM/yyyy'}}</td>
+										 	    		<td>{{objeto.libro}}</td>
+										 	    		<td>{{objeto.foja}}</td>
+										 	    		<td>{{objeto.noDeActa}}</td>
+											    		<td style="width: 10%">
+												    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+																	  En Trámite
+																	</span>
+																	<span ng-if="objeto.estatus == 'bautizado'" class="label label-success">
+																	  Bautizado
+																	</span>
+											    		</td>
+											    		<td>
+												    			<a href="#" ng-click="not.aplicarNota(objeto)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-book ]"></i></a></td>
+										    		</tr>
+										  		</tbody>	
+												</table>
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+<!-- 		        <input type="submit" ng-click="not.finalizarVerificacion(not.objeto)" value="Aceptar" class="btn btn-primary" valida-form formulario="form2"> -->
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="verNota"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Nota</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+						    <textarea rows="4" cols="78" ng-model="not.notaSacramento" readonly="true" >
+								</textarea>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-sm-12 "><br/>
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>
+
+
+
+<!--		 //////////////////////////////////////////////////////////// -->
+
+
+
+
+		

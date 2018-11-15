@@ -1,20 +1,21 @@
 
-angular.module('sisPredios').directive('valida', validador);
-function validador () {
+angular.module('parroquias').directive('valida', validador);
+  function validador () {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-    	element.carga = false
-			input = element.find('.form-control');
-    	var formName = element.parents('form').attr('name');
-    	scope.$watch(formName + '.' + input[0].name + '.$invalid', function (val) {
-    		if(element.carga){
+      element[0].carga = false;
+      input = element.find('.form-control');
+      var formName = element.parents('form').attr('name');
+      
+      scope.$watch(formName + '.' + input[0].name + '.$invalid', function (val) {
+        if(element[0].carga){
           if(val)
-          	element.addClass('has-error');
+            element.addClass('has-error');
           else
-          	element.removeClass('has-error');
+            element.removeClass('has-error');
         }else{
-          element.carga = true
+          element[0].carga = true
         }
       });
     }
@@ -22,17 +23,17 @@ function validador () {
 }
 
 
-angular.module('sisPredios').directive('validaForm', validaForm);
-	function validaForm () {
+angular.module('parroquias').directive('validaForm', validaForm);
+  function validaForm () {
   return {
     restrict: 'A',
       scope:{
           formulario:"="
       },
      link: function(scope, element, attrs) {
-			element.on("click", function () {
+      element.on("click", function () {
         errorsType = scope.formulario.$error;
-        if(errorsType != undefined){
+        if(!_.isEmpty(errorsType)){
           angular.forEach(errorsType, function(errors){
             errors.forEach(function(error){
               if(error.$invalid == true){
@@ -42,9 +43,11 @@ angular.module('sisPredios').directive('validaForm', validaForm);
             })
           });
         }else{
-          setTimeout(function() {$("div").removeClass("has-error");}, 10);  
+          _.each($("div").find("[valida]"), function(elem){
+            elem.carga = false;
+          }); 
         }
       });
-		}
+    }
   }
 }

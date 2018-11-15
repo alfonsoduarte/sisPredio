@@ -1,10 +1,12 @@
 <header id="header">
 	<div id="logo-group">
-		<span id="logo" style="margin-top: 0px !important;"> <img ng-if="ro.seccion.logo != undefined" ng-src="{{ro.seccion.logo}}" style="width: 110px;" alt="Verificaciones"> </span>
-		<span ng-if="ro.usuarioActual.roles[0] == 'director'" id="activity" class="activity-dropdown" ng-click="ro.muestraAvisos()"> <i class="fa fa-user"></i> <b class="badge  bounceIn animated">0</b> </span>
-		
+    <span id="logo"> <img src="img/logoDiocesis.png" alt="SmartAdmin" style="margin-top: -15px;width: 400px;height: 50px;"> </span>
 	</div>
 	
+	<div id="logo-group">
+    <span id="logo" style="margin-top: 0px; margin-left: 200px; width: 600px;height: 50px;"> <h3>{{ro.nombreParroquia}}</h3> </span>
+	</div>
+
   <div class="pull-right">
     <div id="hide-menu" class="btn-header pull-right">
       <span>
@@ -21,8 +23,8 @@
         </a>
       </span>
     </div>
-
-    <div id="fullscreen" class="btn-header transparent pull-right">
+ 
+     <div id="fullscreen" class="btn-header transparent pull-right">
       <span>
         <a full-screen title="Full Screen">
           <i class="fa fa-arrows-alt"></i>

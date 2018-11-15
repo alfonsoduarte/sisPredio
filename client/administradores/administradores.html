@@ -1,0 +1,151 @@
+<h2>Administradores de Parroquia</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{adm.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="adm.Nuevo()">
+		   {{adm.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form name="form" class="form-horizontal" role="form">
+		  	<h3>Datos Generales</h3>
+		  	<div class="well">	    
+					<div class="row">
+							<div class="col-sm-4" valida>
+						    <label>Nombre *</label>
+					    	<input name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="adm.objeto.profile.nombre" required>
+					    </div>
+					    <div class="col-sm-4" valida>
+						    <label>Apellido Paterno *</label>
+					    	<input name="apellidoPaterno" type="text" class="form-control" placeholder="Nombre" ng-model="adm.objeto.profile.apellidoPaterno" required>
+					    </div>
+					    <div class="col-sm-4">
+						    <label>ApellidoMaterno *</label>
+					    	<input name="apellidoMaterno" type="text" class="form-control" placeholder="Nombre" ng-model="adm.objeto.profile.apellidoMaterno">
+					    </div>
+					</div>
+					<div class="row">
+							<div class="col-sm-4">
+						    <label>Correo</label>
+					    	<input name="correo" type="text" class="form-control" placeholder="Correo" ng-model="adm.objeto.profile.correo">
+					    </div>
+					    <div class="col-sm-4">
+						    <label>Celular</label>
+					    	<input name="celular" type="text" class="form-control" placeholder="Celular" ng-model="adm.objeto.profile.celular">
+					    </div>
+					</div>	
+		  	</div>
+		  	<h3>Datos de la Cuenta</h3>
+		  	<div class="well">
+			  	<div class="row">
+				  		<div class="col-sm-4" valida>
+								<label >Diócesis *</label>
+								<select name="diocesis_id" class="form-control select2" placeholder="Seleccione" ng-model="adm.objeto.profile.diocesis_id" required>
+									<option ng-repeat="dio in adm.diocesis" value="{{dio._id}}">{{dio.nombre}}</option>
+								</select>
+							</div>
+				  		
+							<div class="col-sm-3">
+								<label for="parroquia_id">Parroquias *</label>
+								<select ng-options="parroquia._id as parroquia.nombre for parroquia in adm.parroquias" 
+     								ng-model="adm.objeto.profile.parroquia_id" 
+       							class="js-example-basic-single js-states form-control" 
+         						placeholder="Seleccione" 
+             				style="width: 500px;height: 10px" >
+						 		</select>
+							</div>	
+					</div>
+			  	<div class="row">
+						<div class="col-sm-3" valida> 					    
+							<label>Usuario *</label>
+							<input name="usuario" type="text" class="form-control" placeholder="Usuario" ng-model="adm.objeto.username" required="">
+						</div>
+						<div class="col-sm-3" valida>					    
+							<label>Contraseña *</label>
+							<input name="contrasena" type="password" class="form-control" placeholder="Contraseña" ng-model="adm.objeto.password" required="" ng-disabled="adm.cambiarContrasena">
+						</div>		    				    	    
+						<div class="col-sm-3" valida>					    
+							<label>Confirmar Contraseña *</label>
+							<input name="confirmar" type="password" class="form-control" placeholder="Confirmar Contraseña" ng-model="adm.objeto.confirmPassword" required="" ng-disabled="adm.cambiarContrasena">
+						</div>
+						<div class="col-sm-3" ng-show="!adm.action">
+							<br>		    
+							<button type="button" class="btn btn-primary" ng-click="adm.cambiarPassword()">Cambiar Contraseña</button>
+						</div>
+					</div>
+		  	</div>	
+				<div class="well">	
+			    <div class="row">
+							<div class="col-sm-4">
+								<input type="submit" ng-click="adm.guardar(adm.objeto,form)" value="Guardar" class="btn btn-success" ng-show="adm.action" valida-form formulario="form">
+								<input type="submit" ng-click="adm.actualizar(adm.objeto,form)" value="Actualizar" class="btn btn-success" ng-show="!adm.action" valida-form formulario="form">	
+							</div>
+					</div>
+		  	</div>  
+		  </form>
+		</div>
+	</div>
+</div>
+<br>
+<!-- List -->
+<div class="well">
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th width="3%"><div class="text-center">No.</div></th>
+							<th width="25%"><div class="text-center">Nombre</div></th>
+							<th width="25%"><div class="text-center">Parroquia</div></th>
+							<th width="10%"><div class="text-center">Usuario</div></th>
+							<th width="10%"><div class="text-center">Celular</div></th>
+							<th width="10%">
+								<div class="text-center">
+									Estatus
+								</div>
+							</th>
+							<th width="7%">
+								<div class="text-center">
+									Acciones
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+				    <tr ng-repeat="objeto in adm.administradores">
+				     <td>{{$index + 1}}</td>
+					    <td>{{objeto.profile.nombreCompleto}}</td>
+					    <td>{{objeto.profile.parroquia}}</td>
+					    <td>{{objeto.username}}</td>
+					    <td>{{objeto.profile.celular}}</td>
+					    <td>
+						    <div class="text-center">
+						    	<span ng-if="objeto.profile.estatus" class="label label-success">
+									  Activo
+									</span>
+									<span ng-if="!objeto.profile.estatus" class="label label-danger">
+									  Inactivo
+									</span>
+						    </div>
+					    </td>
+					    <td>
+						    <div class="text-center">
+							    <div class="btn-group">
+									  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    <span class="caret"></span>
+									    <span class="sr-only">Toggle Dropdown</span>
+									  </button>
+									  <ul class="dropdown-menu dropdown-menu-right text-left">
+									    <li><a href="#" ng-click="adm.editar(objeto._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+									    <li><a href="#" ng-click="adm.cambiarEstatus(objeto._id)">
+										    <i class="fa fa-{{objeto.profile.estatus ? 'trash' : 'check' }}"></i> {{objeto.profile.estatus ? "Desactivar" : "Activar" }}</a>
+									    </li>
+									  </ul>
+									</div>
+						    </div>				    
+					    </td>
+				    </tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</div>

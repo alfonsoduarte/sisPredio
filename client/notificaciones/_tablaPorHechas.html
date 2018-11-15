@@ -1,0 +1,99 @@
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" width="5%">No.</th>
+			<th class="text-center" width="20%">Nombre</th>
+			<th class="text-center" width="15%">Tipo</th>
+			<th class="text-center" width="15%">Parroquia</th>
+			<th class="text-center" width="15%">Lugar</th>
+			<th class="text-center" width="5%">Fecha</th>
+			<th class="text-center" width="5%">Folio</th>
+			<th class="text-center" width="5%">Foja</th>
+			<th class="text-center" width="5%">Acta</th>
+			<th class="text-center" width="5%">Tipo</th>
+			<th class="text-center" width="5%">Estatus</th>
+			<th class="text-center" width="5%">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+    <tr ng-repeat="objeto in not.notificacionesHechas">
+	    <td class="text-center">{{$index + 1}}</td>
+	    <td>{{objeto.nombreCompleto}}</td>
+	    <td>{{objeto.tipoNota}}</td>
+	    <td>{{objeto.parroquiaDestino}}</td>
+	    <td>{{objeto.lugarDestino}}</td>
+	    <td>{{objeto.fechaSacramento | date : "dd/MM/yyyy"}}</td>
+	    <td>{{objeto.libro}}</td>
+	    <td>{{objeto.foja}}</td>
+	    <td>{{objeto.noDeActa}}</td>
+	    <td>{{objeto.tipo}}</td>
+	    <td>
+			    <div class="text-center">
+			    	<span ng-if="objeto.estatus == 1" class="label label-warning">
+						  Pendiente
+						</span>
+						<span ng-if="objeto.estatus == 2" class="label label-success">
+						  Aplicada
+						</span>
+				  </div>
+			</td>
+			<td>
+			    <div class="text-center" ng-if="objeto.tipo == 'carta' && objeto.estatus == 1 ">
+				    <div class="btn-group">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-right text-left">
+						    <li><a href="#" ng-click = "not.aplicarNotificacion(objeto)">Aplicar</a></li>
+						    <li><a href="#" ng-click = "not.seleccionaFirma(objeto, 1)" >Imprimir</a></li>
+						  </ul>
+						</div>
+			    </div>				    
+			</td>
+    </tr>
+	</tbody>
+</table>
+
+
+
+
+<!--		 //////////////////////////////////////////////////////////// -->
+
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="not.sacerdoteFirma_id" required>
+								<option ng-repeat="sac in not.sacerdotesFirma" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="not.imprimirNotificacion(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>
+
+
+
+		

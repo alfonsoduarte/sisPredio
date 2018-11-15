@@ -1,5 +1,5 @@
 angular
-  .module('sisPredios')
+  .module('parroquias')
   .controller('LoginCtrl', LoginCtrl);
  
 function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
@@ -13,26 +13,8 @@ function LoginCtrl($scope, $meteor, $reactive, $state, toastr) {
   };
 
   this.login = function () {
-	  
-	  //console.log(this.credentials.username);
-	  //console.log(this.credentials.password);
-	  
-	  //this.credentials.username = this.credentials.username.replace("@", ".");
-	  
+	  	  
     $meteor.loginWithPassword(this.credentials.username, this.credentials.password).then(
-	    /*
-	    if (Meteor.user().profile.estatus == false && Meteor.user().profile.nombre != "Super Administrador")
-	      {
-		      	return $meteor.logout().then(
-	            function () {
-	              $state.go('anon.login');
-	            },
-	            function (error) {
-	              toastr.error(error.reason);
-	            }
-          );
-	    }
-	    */
 	    
       function () {
 	      toastr.success("Bienvenido al Sistema");

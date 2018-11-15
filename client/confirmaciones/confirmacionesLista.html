@@ -1,0 +1,391 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+		<h1 class="alge-title txt-color-blueDark">
+			<i class="fa fa-search fa-fw "></i>
+				Confirmaciones &gt; Buscar
+		</h1>
+	</div>
+</div>
+<div class="well">	
+	<div class="row">
+		<div class="col-sm-1">
+				<a href="./confirmaciones" class="btn btn-default btn-primary">
+						<i class="fa fa-plus"></i> Nuevo
+				</a>
+		</div>	
+		<div class="col-sm-1">
+				<a href="#" ng-click="conl.verListado()" class="btn btn-default btn-primary">
+						<i class="fa fa-file-text-o"></i> Listado
+				</a>
+		</div>
+		
+		<div class="col-sm-4 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="conl.busquedaParroquia" ng-click="conl.inicializaBusqueda()" btn-radio="'local'">Local</label>
+ 						<label class="btn btn-default" ng-model="conl.busquedaParroquia" ng-click="conl.inicializaBusqueda()" btn-radio="'foranea'">Foranea</label>
+ 			  </div>
+			</div>	
+ 		</div>
+			
+		<div class="col-sm-4 pull-right">
+			<div class="form-group has-feedback has-success">
+ 				<div class="btn-group" data-toggle="buttons">
+ 						<label class="btn btn-default" ng-model="conl.busqueda" ng-click="baul.inicializaBusqueda()" btn-radio="'nombre'">Nombre</label>
+ 						<label class="btn btn-default" ng-model="conl.busqueda" ng-click="baul.inicializaBusqueda()" btn-radio="'fechas'">Fecha</label>
+ 			  </div>
+			</div>	
+ 		</div>
+ 	</div> 
+  <div class="row">
+		<div class="col-sm-6" ng-if = "conl.busqueda == 'nombre'">
+				<label>Apellido Paterno, ApellidoMaterno y Nombre (s)  </label>
+				<input class="form-control" type="text" placeholder="Buscar..." ng-model="conl.buscar.nombre" capitalize> 
+		</div>
+ 		<div ng-if = "conl.busqueda == 'fechas'">
+				<div class="col-sm-3">	
+					<label>Fecha Inicial </label>				    
+					<input name="fechaInicial" type="date" format="dd/MM/yyyy" class="form-control" ng-model="conl.fechaInicial">
+				</div>
+				<div class="col-sm-3">					    
+					<label>Fecha Final </label>
+					<input name="fechaFinal" type="date" format="dd/MM/yyyy" class="form-control" ng-model="conl.fechaFinal">
+				</div>
+				<div class="col-sm-1">
+						<br>
+						<a href="#" ng-click = "conl.buscarConfirmacionesFecha()" class="btn btn-default btn-primary">
+								<i class="fa fa-search"></i> Buscar
+						</a>
+				</div>
+ 		</div>
+ 		
+ 		<div ng-show = "conl.busquedaParroquia == 'foranea'">
+				
+				<div class="col-sm-4 pull-right">
+					<label >Parroquia Foranea </label>
+					<select ng-options="p._id as p.nombre for p in conl.parroquiasBuscar" 
+   								ng-model="conl.parroquiaForanea_id" 
+     							class="js-example-basic-single js-states form-control" 
+       						placeholder="Seleccione" 
+           				style="width: 300px; height: 80px; ">
+					</select>
+				</div>
+		</div>
+ 		
+ 	</div> 
+
+ </div>
+<div class="well">	
+ 	<div class="row">
+<!--
+ 		<div class="[ col-sm-3 ]" ng-repeat="objeto in conl.arreglo">
+        <div class="[ panel panel-default ] panel-google-plus">
+             <div class="panel-heading">
+                <h4>{{objeto.apellidoPaterno}} {{objeto.apellidoMaterno}}</h4>
+                <h4>{{objeto.nombre}}</h4>
+            </div>
+            <div class="panel-body">
+                <h6><span>Fecha: </span><span>{{objeto.fecha | date: "dd/MM/yyyy"}} </span> </h6>
+                <h6><span>Hora: </span><span>{{objeto.hora | date:"h:mm a"}} </span> 
+                <span ng-if="objeto.estatus == 'enTramite'" class="label label-warning pull-right">
+								  En Trámite
+								</span>
+								<span ng-if="objeto.estatus == 'confirmado'" class="label label-success pull-right">
+								  Confirmado
+								</span>
+                </h6>
+            </div>
+            <div class="panel-footer">
+                <a href="#" ng-click="conl.verDatos(objeto)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i> </a>
+                <a href="/confirmaciones/{{objeto._id}}" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-pencil ]"></i> </a>
+                <a href="#" ng-click="conl.seleccionaFirma(objeto,1)" class="[ btn btn-default ]" ng-if="objeto.estatus=='confirmado'"><i class="[ glyphicon glyphicon-book ]"></i></a>
+		            <a href="#" ng-click="conl.seleccionaFirma(objeto,2)" class="[ btn btn-default ]" ng-if="objeto.estatus=='enTramite'"><i class="[ glyphicon glyphicon-file ]"></i></a>    
+            </div>
+        </div>
+    </div>
+-->
+		
+		<div class="row">
+		 	<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="conl.izq()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</span>Izq 
+				</a>
+			</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="conl.der()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</span>Der
+				</a>
+			</div>
+			
+	 	</div>
+		
+	 	<table class="table table-bordered table-hover">
+  		<thead>
+				<tr>	  		
+ 	    		<th style="text-align: center">No.</th>
+	    		<th style="text-align: center">Nombre</th>
+	    		<th style="text-align: center">Fecha</th>
+	    		<th style="text-align: center">Libro</th>
+	    		<th style="text-align: center">Foja</th>
+	    		<th style="text-align: center">N. Acta</th>
+ 	    		<th style="text-align: center">Estatus</th>
+	    		<th style="text-align: center">Acción</th>
+	    	</tr>	
+  		</thead>
+  		<tbody>
+    		<tr ng-repeat ="objeto in conl.arreglo">
+ 	    		<td style="width: 5%">{{$index + conl.numeroPagina + 1}}</td>
+ 	    		<td>{{objeto.nombreCompleto}}</td>
+ 	    		<td>{{objeto.fecha | date: 'dd/MM/yyyy'}}</td>
+ 	    		<td>{{objeto.libro}}</td>
+ 	    		<td>{{objeto.foja}}</td>
+ 	    		<td>{{objeto.noDeActa}}</td>
+	    		<td style="width: 10%">
+		    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+							  En Trámite
+							</span>
+							<span ng-if="objeto.estatus == 'confirmado'" class="label label-success">
+							  Confirmado
+							</span>
+	    		</td>
+		    	<td>
+				    	<a href="#" ng-click="conl.verDatos(objeto._id)" class="[ btn btn-default ]"><i class="[ glyphicon glyphicon-eye-open ]"></i></a>
+              <a href ="/confirmaciones/{{objeto._id}}" class="[ btn btn-default ]" 
+	               ng-if = "conl.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-pencil ]"></i>
+	            </a>
+              <a href="#" ng-click="conl.seleccionaFirma(objeto._id,1)" class="[ btn btn-default ]" 
+	               ng-if="objeto.estatus == 'confirmado' && conl.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-book ]"></i>	
+	            </a>
+	            <a href="#" ng-click="conl.seleccionaFirma(objeto._id,2)" class="[ btn btn-default ]" 
+		             ng-if="objeto.estatus == 'enTramite' && conl.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-file ]"></i>
+		          </a>
+		          <a href="#" ng-click="conl.eliminar(objeto)" class="[ btn btn-default ]" 
+		             ng-if="currentUser.roles[0] == 'Administrador' && conl.busquedaParroquia == 'local'"><i class="[ glyphicon glyphicon-remove ]"></i>
+		          </a>
+		          
+		    	</td>	
+    		</tr>
+  		</tbody>	
+		</table>	
+		
+		<div class="row">
+		 	<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="conl.izq()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</span>Izq 
+				</a>
+			</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0);" ng-click="conl.der()" class="btn btn-labeled btn-default"> 
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</span>Der
+				</a>
+			</div>
+		</div>
+ 	</div>
+</div>	
+
+
+<div id="modalVerDatos" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Confirmado: {{conl.objeto.nombreCompleto}}</h4>
+		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<tbody>
+										    		<tr>
+											    		<td style="width: 20%">Fecha Confirmación:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.fechaConfirmacionLetra}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Fecha Bautismo:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.fechaBautismoLetra}}</strong></td>
+										    		</tr>
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia Bautismo:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.parroquiaBautismo}}</strong></td>
+										    		</tr>
+ 										    		
+										    		<tr>
+											    		<td style="width: 20%">Parroquia:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.parroquiaNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Sacerdote Confirmó:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.sacerdoteNombre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="conl.objeto.estatus == 'confirmado'">
+											    		<td style="width: 20%">Libro:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.libro}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="conl.objeto.estatus == 'confirmado'">
+											    		<td style="width: 20%">Foja:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.foja}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr ng-if="conl.objeto.estatus == 'confirmado'">
+											    		<td style="width: 20%">No. de Acta:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.noDeActa}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.padre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Madre:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.madre}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Padrino:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.padrino}}</strong></td>
+										    		</tr>	
+ 
+ 										    		<tr>
+											    		<td style="width: 20%">Fecha Nacimiento:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.fechaNacimientoLetra}}</strong></td>
+										    		</tr>	
+										    		
+										    		<tr>
+											    		<td style="width: 20%">Lugar Nacimiento:</td>
+												    	<td style="width: 80%; text-align: left"><strong>{{conl.objeto.lugarNacimiento}}</strong></td>
+										    		</tr>	
+										    		
+									    		</tbody>	
+								    		</table>	
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+
+<div id="modalVerListado" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+	    	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Listado</h4>
+		        </div> 
+		        <div class="col-sm-1">
+			        <h4 class="modal-title" id="myModalLabel">Fecha:</h4>
+		        </div> 
+		        <div class="col-sm-3">					    
+							<input name="fecha" type="date" format="dd/MM/yyyy" class="form-control" placeholder="Fecha" ng-model="conl.fecha">
+						</div>
+						<div class="col-sm-1">
+								<a href="#" ng-click = "conl.buscarConfirmaciones()" class="btn btn-default btn-primary">
+										<i class="fa fa-search"></i> Buscar
+								</a>
+						</div>	
+ 		    </div>
+				<div class="modal-body">
+							<form name="form2" novalidate>
+									<div class="well">	    
+								    <div class="row">
+								    		<table class="table">
+									    		<thead>
+											    	<th width="10%" style="margin: 0px; border: 0px; padding: 0px">
+															<input id="todos" type="checkbox" class="form-control" 
+																								ng-checked="false" 
+																								ng-click="conl.seleccionarTodos()" style="margin: 0px; border: 0px; padding: 0px" />
+														</th>
+										    		<th>No.</th>
+										    		<th>Confirmado</th>
+										    		<th>Estatus</th>
+										    		<th>Acción</th>
+									    		</thead>
+									    		<tbody>
+										    		<tr ng-repeat ="objeto in conl.arregloListado">
+											    		<td style="margin: 0px; border: 0px; padding: 0px">
+												    		<input type="checkbox" class="form-control" 
+				    											 ng-model="objeto.imprimir"  style="margin: 0px; border: 0px; padding: 0px"/>
+											    		</td>
+											    		<td style="width: 10%">{{$index + 1}}</td>
+											    		<td>{{objeto.nombreCompleto}}</td>
+											    		<td>
+												    			<span ng-if="objeto.estatus == 'enTramite'" class="label label-warning">
+																	  En Trámite
+																	</span>
+																	<span ng-if="objeto.estatus == 'bautizado'" class="label label-success">
+																	  Bautizado
+																	</span>
+											    		</td>
+												    	<td style="width: 10%">
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="conl.seleccionaFirma(objeto._id,1)" ng-if="objeto.estatus == 'bautizado'"><i class="fa fa-gear fa-print"></i></a> 
+													    	<a href="#" class="btn btn-primary btn-xs" ng-click="conl.seleccionaFirma(objeto._id,2)" ng-if="objeto.estatus == 'enTramite'"><i class="fa fa-gear fa-print"></i></a>
+													    	
+												    	</td>	
+										    		</tr>
+									    		</tbody>	
+								    		</table>	
+								    </div>
+									</div>
+							</form>
+	      </div>	
+	      <div class="modal-footer">
+		        <button type="button" ng-click = "conl.seleccionaFirma({listado:'listado'},3)" class="btn btn-success">Aceptar</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+		     </div>
+     </div>
+     
+  </div>
+</div>
+ 
+<div id="modalFirma"	class="modal fade" data-backdrop="static" role="dialog">
+ 	<div class="modal-dialog">
+	<!-- Modal content-->
+		<form name="formImprimir" novalidate>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Seleccione el Sacerdote a Firmar</h4>
+  			</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-8" valida>
+							<label for="sacerdote_id">Sacerdote *</label>
+							<select name="sacerdote_id" class="form-control" ng-model="conl.sacerdote_id" required>
+								<option ng-repeat="sac in conl.sacerdotes" value="{{sac._id}}">{{sac.profile.nombreCompleto}}</option>
+							</select>
+						</div>
+					</div>		
+ 				</div>
+				<div class="modal-footer">
+					<div class="row">
+						 
+						<div class="col-sm-12 "><br/>
+							<button type="button" ng-click="conl.imprimir(formImprimir)" class="btn btn-success" valida-form formulario="formImprimir">Imprimir</button> 
+							<button type="button" id="cerrarRespuesta" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>								 
+				</div>
+			</div>  
+		</form>	
+  </div>
+
+</div>
